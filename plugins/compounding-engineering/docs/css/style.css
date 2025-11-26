@@ -1216,3 +1216,186 @@ section {
     padding: var(--space-xl);
   }
 }
+
+/* ============================================
+   Philosophy Section (Enhanced)
+   ============================================ */
+
+.philosophy-section {
+  padding: var(--space-section) 0;
+}
+
+.philosophy-quote {
+  max-width: 800px;
+  margin: 0 auto var(--space-xxl);
+  text-align: center;
+}
+
+.philosophy-quote blockquote {
+  font-size: var(--font-size-l);
+  font-style: italic;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  padding: var(--space-xl);
+  background: linear-gradient(135deg, var(--color-accent-lighter), transparent);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-m);
+}
+
+/* Philosophy Pillars */
+.philosophy-pillars {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xxl);
+}
+
+@media (min-width: 768px) {
+  .philosophy-pillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pillar {
+  display: flex;
+  gap: var(--space-l);
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-l);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.pillar:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.pillar-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent-light);
+  border-radius: var(--radius-m);
+  font-size: var(--font-size-xl);
+  color: var(--color-accent);
+}
+
+.pillar-content h3 {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: var(--font-size-l);
+  color: var(--color-text-primary);
+}
+
+.pillar-tagline {
+  margin: 0 0 var(--space-m) 0;
+  font-size: var(--font-size-s);
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.pillar-description {
+  margin: 0 0 var(--space-m) 0;
+  font-size: var(--font-size-s);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.pillar-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.tool-tag {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  padding: 2px 8px;
+  background-color: var(--color-surface-hover);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-border);
+}
+
+/* Compound Effect Timeline */
+.compound-effect {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-l);
+  padding: var(--space-xl);
+  border: 1px solid var(--color-border);
+}
+
+.compound-effect h3 {
+  text-align: center;
+  margin: 0 0 var(--space-xl) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+}
+
+.compound-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-m);
+}
+
+.compound-item {
+  text-align: center;
+  padding: var(--space-l);
+  background-color: var(--color-background);
+  border-radius: var(--radius-m);
+  border: 1px solid var(--color-border);
+  min-width: 140px;
+}
+
+.compound-item.highlight {
+  background: linear-gradient(135deg, var(--color-accent-light), var(--color-surface));
+  border-color: var(--color-accent);
+}
+
+.compound-number {
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.compound-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.compound-arrow {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-l);
+}
+
+@media (max-width: 767px) {
+  .pillar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .pillar-icon {
+    margin: 0 auto;
+  }
+
+  .pillar-tools {
+    justify-content: center;
+  }
+
+  .compound-arrow {
+    transform: rotate(90deg);
+  }
+
+  .compound-grid {
+    flex-direction: column;
+  }
+}

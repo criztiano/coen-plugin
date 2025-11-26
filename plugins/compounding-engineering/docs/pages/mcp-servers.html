@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+
+<head>
+  <meta charset="utf-8" />
+  <title>MCP Servers Reference - Compounding Engineering</title>
+  <meta content="Complete reference for the 2 MCP servers in the Compounding Engineering plugin." name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="docs-layout">
+    <aside class="docs-sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="nav-brand">
+          <span class="logo-icon"><i class="fa-solid fa-layer-group"></i></span>
+          <span class="logo-text">CE Docs</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h3>Getting Started</h3>
+          <ul>
+            <li><a href="getting-started.html">Installation</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3>Reference</h3>
+          <ul>
+            <li><a href="agents.html">Agents (24)</a></li>
+            <li><a href="commands.html">Commands (16)</a></li>
+            <li><a href="skills.html">Skills (11)</a></li>
+            <li><a href="mcp-servers.html" class="active">MCP Servers (2)</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3>On This Page</h3>
+          <ul>
+            <li><a href="#playwright">Playwright</a></li>
+            <li><a href="#context7">Context7</a></li>
+            <li><a href="#manual-config">Manual Configuration</a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="docs-content">
+      <div class="docs-header">
+        <nav class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <span>/</span>
+          <a href="getting-started.html">Docs</a>
+          <span>/</span>
+          <span>MCP Servers</span>
+        </nav>
+        <button class="mobile-menu-toggle" data-sidebar-toggle>
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <article class="docs-article">
+        <h1><i class="fa-solid fa-server color-accent"></i> MCP Servers Reference</h1>
+        <p class="lead">
+          Model Context Protocol (MCP) servers extend Claude Code's capabilities with
+          browser automation and framework documentation lookup. The plugin bundles
+          2 MCP servers that start automatically when enabled.
+        </p>
+
+        <div class="callout callout-warning">
+          <div class="callout-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="callout-content">
+            <h4>Known Issue: Auto-Loading</h4>
+            <p>
+              MCP servers may not load automatically when the plugin is installed.
+              See <a href="#manual-config">Manual Configuration</a> for the workaround.
+            </p>
+          </div>
+        </div>
+
+        <!-- Playwright -->
+        <section id="playwright">
+          <h2><i class="fa-brands fa-chrome"></i> Playwright</h2>
+          <p>
+            Browser automation via <code>@playwright/mcp</code>. Enables taking screenshots,
+            clicking elements, filling forms, and executing JavaScript in a real browser.
+          </p>
+
+          <h3>Tools Provided</h3>
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Tool</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>browser_navigate</code></td>
+                <td>Navigate to a URL in the browser</td>
+              </tr>
+              <tr>
+                <td><code>browser_take_screenshot</code></td>
+                <td>Capture a screenshot of the current page or element</td>
+              </tr>
+              <tr>
+                <td><code>browser_click</code></td>
+                <td>Click on an element using CSS selector or text</td>
+              </tr>
+              <tr>
+                <td><code>browser_fill_form</code></td>
+                <td>Fill form fields with values</td>
+              </tr>
+              <tr>
+                <td><code>browser_snapshot</code></td>
+                <td>Get an accessibility tree snapshot of the page</td>
+              </tr>
+              <tr>
+                <td><code>browser_evaluate</code></td>
+                <td>Execute JavaScript code in the browser context</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Use Cases</h3>
+          <ul>
+            <li><strong>Design Iteration</strong> - Take screenshots for UI comparison</li>
+            <li><strong>Testing</strong> - Automate browser interactions</li>
+            <li><strong>Debugging</strong> - Inspect page state and DOM</li>
+            <li><strong>Data Extraction</strong> - Scrape content from web pages</li>
+          </ul>
+
+          <h3>Example Usage</h3>
+          <div class="card-code-block">
+            <pre><code># The tools are available when the MCP server is running
+# Claude Code will use them automatically when appropriate
+
+# Example: Taking a screenshot for design review
+"Take a screenshot of the login page"
+
+# Example: Testing a form
+"Navigate to /signup and fill in the email field with test@example.com"</code></pre>
+          </div>
+
+          <h3>Configuration</h3>
+          <div class="card-code-block">
+            <pre><code>{
+  "playwright": {
+    "type": "stdio",
+    "command": "npx",
+    "args": ["-y", "@playwright/mcp@latest"],
+    "env": {}
+  }
+}</code></pre>
+          </div>
+        </section>
+
+        <!-- Context7 -->
+        <section id="context7">
+          <h2><i class="fa-solid fa-book-open"></i> Context7</h2>
+          <p>
+            Framework documentation lookup via Context7 MCP. Provides access to
+            documentation for 100+ frameworks and libraries.
+          </p>
+
+          <h3>Tools Provided</h3>
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Tool</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>resolve-library-id</code></td>
+                <td>Find the library ID for a framework or package</td>
+              </tr>
+              <tr>
+                <td><code>get-library-docs</code></td>
+                <td>Get documentation for a specific library</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Supported Frameworks</h3>
+          <p>Context7 supports 100+ frameworks including:</p>
+          <div class="framework-grid">
+            <div class="framework-category">
+              <h4>Backend</h4>
+              <ul>
+                <li>Ruby on Rails</li>
+                <li>Django</li>
+                <li>Laravel</li>
+                <li>Express</li>
+                <li>FastAPI</li>
+                <li>Spring Boot</li>
+              </ul>
+            </div>
+            <div class="framework-category">
+              <h4>Frontend</h4>
+              <ul>
+                <li>React</li>
+                <li>Vue.js</li>
+                <li>Angular</li>
+                <li>Svelte</li>
+                <li>Next.js</li>
+                <li>Nuxt</li>
+              </ul>
+            </div>
+            <div class="framework-category">
+              <h4>Mobile</h4>
+              <ul>
+                <li>React Native</li>
+                <li>Flutter</li>
+                <li>SwiftUI</li>
+                <li>Kotlin</li>
+              </ul>
+            </div>
+            <div class="framework-category">
+              <h4>Tools & Libraries</h4>
+              <ul>
+                <li>Tailwind CSS</li>
+                <li>PostgreSQL</li>
+                <li>Redis</li>
+                <li>GraphQL</li>
+                <li>Prisma</li>
+                <li>And many more...</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Example Usage</h3>
+          <div class="card-code-block">
+            <pre><code># Claude Code will use Context7 automatically for documentation lookups
+"Look up the Rails ActionCable documentation"
+
+"How does the useEffect hook work in React?"
+
+"What are the best practices for PostgreSQL indexes?"</code></pre>
+          </div>
+
+          <h3>Configuration</h3>
+          <div class="card-code-block">
+            <pre><code>{
+  "context7": {
+    "type": "http",
+    "url": "https://mcp.context7.com/mcp"
+  }
+}</code></pre>
+          </div>
+        </section>
+
+        <!-- Manual Configuration -->
+        <section id="manual-config">
+          <h2><i class="fa-solid fa-gear"></i> Manual Configuration</h2>
+          <p>
+            If MCP servers don't auto-load with the plugin, add them manually to your
+            <code>.claude/settings.json</code> file.
+          </p>
+
+          <h3>Project-Level Configuration</h3>
+          <p>Add to <code>.claude/settings.json</code> in your project:</p>
+          <div class="card-code-block">
+            <pre><code>{
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "env": {}
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    }
+  }
+}</code></pre>
+          </div>
+
+          <h3>Global Configuration</h3>
+          <p>Add to <code>~/.claude/settings.json</code> to enable for all projects:</p>
+          <div class="card-code-block">
+            <pre><code>{
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "env": {}
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    }
+  }
+}</code></pre>
+          </div>
+
+          <h3>Requirements</h3>
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Server</th>
+                <th>Requirement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Playwright</td>
+                <td>Node.js 18+ and npx</td>
+              </tr>
+              <tr>
+                <td>Context7</td>
+                <td>Internet connection (HTTP endpoint)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Verifying MCP Servers</h3>
+          <p>After configuration, restart Claude Code and verify the servers are loaded:</p>
+          <div class="card-code-block">
+            <pre><code># Check if MCP tools are available
+"What MCP tools do you have access to?"
+
+# Test Playwright
+"Take a screenshot of the current directory listing"
+
+# Test Context7
+"Look up Rails Active Record documentation"</code></pre>
+          </div>
+        </section>
+
+        <!-- Navigation -->
+        <nav class="docs-nav-footer">
+          <a href="skills.html" class="nav-prev">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title"><i class="fa-solid fa-arrow-left"></i> Skills</span>
+          </a>
+          <a href="getting-started.html" class="nav-next">
+            <span class="nav-label">Back to</span>
+            <span class="nav-title">Getting Started <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+        </nav>
+      </article>
+    </main>
+  </div>
+
+  <style>
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-l);
+      margin: var(--space-l) 0;
+    }
+
+    @media (min-width: 768px) {
+      .framework-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .framework-category {
+      background-color: var(--color-surface);
+      padding: var(--space-l);
+      border-radius: var(--radius-m);
+      border: 1px solid var(--color-border);
+    }
+
+    .framework-category h4 {
+      margin: 0 0 var(--space-s) 0;
+      color: var(--color-accent);
+      font-size: var(--font-size-s);
+    }
+
+    .framework-category ul {
+      margin: 0;
+      padding-left: var(--space-l);
+    }
+
+    .framework-category li {
+      margin: var(--space-xs) 0;
+      font-size: var(--font-size-s);
+      color: var(--color-text-secondary);
+    }
+  </style>
+
+  <script>
+    document.querySelector('[data-sidebar-toggle]')?.addEventListener('click', () => {
+      document.querySelector('.docs-sidebar').classList.toggle('open');
+    });
+  </script>
+</body>
+
+</html>

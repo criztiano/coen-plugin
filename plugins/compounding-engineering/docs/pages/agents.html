@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Agent Reference - Compounding Engineering</title>
+  <meta content="Complete reference for all 24 specialized AI agents in the Compounding Engineering plugin." name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="docs-layout">
+    <aside class="docs-sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="nav-brand">
+          <span class="logo-icon"><i class="fa-solid fa-layer-group"></i></span>
+          <span class="logo-text">CE Docs</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h3>Getting Started</h3>
+          <ul>
+            <li><a href="getting-started.html">Installation</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3>Reference</h3>
+          <ul>
+            <li><a href="agents.html" class="active">Agents (24)</a></li>
+            <li><a href="commands.html">Commands (16)</a></li>
+            <li><a href="skills.html">Skills (11)</a></li>
+            <li><a href="mcp-servers.html">MCP Servers (2)</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3>On This Page</h3>
+          <ul>
+            <li><a href="#review-agents">Review (10)</a></li>
+            <li><a href="#research-agents">Research (4)</a></li>
+            <li><a href="#workflow-agents">Workflow (6)</a></li>
+            <li><a href="#design-agents">Design (3)</a></li>
+            <li><a href="#docs-agents">Docs (1)</a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="docs-content">
+      <div class="docs-header">
+        <nav class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <span>/</span>
+          <a href="getting-started.html">Docs</a>
+          <span>/</span>
+          <span>Agents</span>
+        </nav>
+        <button class="mobile-menu-toggle" data-sidebar-toggle>
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <article class="docs-article">
+        <h1><i class="fa-solid fa-users-gear color-accent"></i> Agent Reference</h1>
+        <p class="lead">
+          Complete documentation for all 24 specialized AI agents. Each agent brings deep expertise
+          in a specific domain and can be invoked individually or orchestrated together.
+        </p>
+
+        <div class="usage-box">
+          <h3>How to Use Agents</h3>
+          <div class="card-code-block">
+            <pre><code># Basic invocation
+claude agent [agent-name]
+
+# With a specific message
+claude agent [agent-name] "Your message here"
+
+# Examples
+claude agent kieran-rails-reviewer
+claude agent security-sentinel "Audit the payment flow"</code></pre>
+          </div>
+        </div>
+
+        <!-- Review Agents -->
+        <section id="review-agents">
+          <h2><i class="fa-solid fa-code-pull-request"></i> Review Agents (10)</h2>
+          <p>Code review agents that examine changes from multiple perspectives: conventions, security, performance, architecture, and quality.</p>
+
+          <div class="agent-detail" id="kieran-rails-reviewer">
+            <div class="agent-detail-header">
+              <h3>kieran-rails-reviewer</h3>
+              <span class="agent-badge">Rails</span>
+            </div>
+            <p class="agent-detail-description">
+              Super senior Rails developer with impeccable taste and an exceptionally high bar for Rails code quality.
+              Reviews with strict conventions while being pragmatic on new isolated code.
+            </p>
+            <h4>Key Principles</h4>
+            <ul>
+              <li><strong>Existing Code Modifications</strong> - Very strict. Added complexity needs strong justification.</li>
+              <li><strong>New Code</strong> - Pragmatic. If it's isolated and works, it's acceptable.</li>
+              <li><strong>Turbo Streams</strong> - Simple turbo streams MUST be inline arrays in controllers.</li>
+              <li><strong>Testing as Quality</strong> - Hard-to-test code = poor structure that needs refactoring.</li>
+              <li><strong>Naming (5-Second Rule)</strong> - Must understand what a view/component does in 5 seconds from its name.</li>
+              <li><strong>Namespacing</strong> - Always use <code>class Module::ClassName</code> pattern.</li>
+              <li><strong>Duplication > Complexity</strong> - Simple duplicated code is better than complex DRY abstractions.</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent kieran-rails-reviewer "Review the UserController"</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="dhh-rails-reviewer">
+            <div class="agent-detail-header">
+              <h3>dhh-rails-reviewer</h3>
+              <span class="agent-badge">Rails</span>
+            </div>
+            <p class="agent-detail-description">
+              Brutally honest Rails code review from David Heinemeier Hansson's perspective.
+              Focuses on Rails conventions, simplicity, and avoiding over-engineering.
+            </p>
+            <h4>Key Focus Areas</h4>
+            <ul>
+              <li>Identifies deviations from Rails conventions</li>
+              <li>Spots JavaScript framework patterns infiltrating Rails</li>
+              <li>Tears apart unnecessary abstractions</li>
+              <li>Challenges overengineering and microservices mentality</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent dhh-rails-reviewer</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="kieran-python-reviewer">
+            <div class="agent-detail-header">
+              <h3>kieran-python-reviewer</h3>
+              <span class="agent-badge">Python</span>
+            </div>
+            <p class="agent-detail-description">
+              Reviews Python code with an exceptionally high quality bar. Enforces type hints, Pythonic patterns,
+              and modern Python 3.10+ syntax.
+            </p>
+            <h4>Key Focus Areas</h4>
+            <ul>
+              <li>Type hints for all functions</li>
+              <li>Pythonic patterns and idioms</li>
+              <li>Modern Python syntax</li>
+              <li>Import organization</li>
+              <li>Module extraction signals</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent kieran-python-reviewer</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="kieran-typescript-reviewer">
+            <div class="agent-detail-header">
+              <h3>kieran-typescript-reviewer</h3>
+              <span class="agent-badge">TypeScript</span>
+            </div>
+            <p class="agent-detail-description">
+              Reviews TypeScript code with an exceptionally high quality bar. Enforces type safety,
+              modern patterns, and clean architecture.
+            </p>
+            <h4>Key Focus Areas</h4>
+            <ul>
+              <li>No <code>any</code> without justification</li>
+              <li>Component/module extraction signals</li>
+              <li>Import organization</li>
+              <li>Modern TypeScript patterns</li>
+              <li>Testability assessment</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent kieran-typescript-reviewer</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="security-sentinel">
+            <div class="agent-detail-header">
+              <h3>security-sentinel</h3>
+              <span class="agent-badge critical">Security</span>
+            </div>
+            <p class="agent-detail-description">
+              Performs security audits, vulnerability assessments, and OWASP compliance checks.
+              Essential for any code handling authentication, payments, or sensitive data.
+            </p>
+            <h4>Security Checks</h4>
+            <ul>
+              <li>Input validation analysis</li>
+              <li>SQL injection risk assessment</li>
+              <li>XSS vulnerability detection</li>
+              <li>Authentication/authorization audit</li>
+              <li>Sensitive data exposure scanning</li>
+              <li>OWASP Top 10 compliance</li>
+              <li>Hardcoded secrets search</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent security-sentinel "Audit the payment flow"</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="performance-oracle">
+            <div class="agent-detail-header">
+              <h3>performance-oracle</h3>
+              <span class="agent-badge">Performance</span>
+            </div>
+            <p class="agent-detail-description">
+              Analyzes code for performance issues, bottlenecks, and scalability concerns.
+              Projects performance at 10x, 100x, and 1000x scale.
+            </p>
+            <h4>Analysis Areas</h4>
+            <ul>
+              <li>Algorithmic complexity (Big O notation)</li>
+              <li>N+1 query pattern detection</li>
+              <li>Proper index usage verification</li>
+              <li>Memory management review</li>
+              <li>Caching opportunity identification</li>
+              <li>Network usage optimization</li>
+              <li>Frontend bundle impact</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent performance-oracle</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="architecture-strategist">
+            <div class="agent-detail-header">
+              <h3>architecture-strategist</h3>
+              <span class="agent-badge">Architecture</span>
+            </div>
+            <p class="agent-detail-description">
+              Analyzes code changes from an architectural perspective. Evaluates system structure,
+              SOLID principles, and API contracts.
+            </p>
+            <h4>Analysis Areas</h4>
+            <ul>
+              <li>Overall system structure understanding</li>
+              <li>Change context within architecture</li>
+              <li>Architectural violation identification</li>
+              <li>SOLID principles compliance</li>
+              <li>Microservice boundary assessment</li>
+              <li>API contract evaluation</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent architecture-strategist</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="data-integrity-guardian">
+            <div class="agent-detail-header">
+              <h3>data-integrity-guardian</h3>
+              <span class="agent-badge critical">Data</span>
+            </div>
+            <p class="agent-detail-description">
+              Reviews database migrations, data models, and data persistence code.
+              Ensures data safety and privacy compliance.
+            </p>
+            <h4>Review Areas</h4>
+            <ul>
+              <li>Migration safety and reversibility</li>
+              <li>Data constraint validation</li>
+              <li>Transaction boundary review</li>
+              <li>Referential integrity preservation</li>
+              <li>Privacy compliance (GDPR, CCPA)</li>
+              <li>Data corruption scenario checking</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent data-integrity-guardian</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="pattern-recognition-specialist">
+            <div class="agent-detail-header">
+              <h3>pattern-recognition-specialist</h3>
+              <span class="agent-badge">Patterns</span>
+            </div>
+            <p class="agent-detail-description">
+              Analyzes code for design patterns, anti-patterns, naming conventions, and duplication.
+              Uses tools like jscpd for duplication detection.
+            </p>
+            <h4>Detection Areas</h4>
+            <ul>
+              <li>Design patterns (Factory, Singleton, Observer, etc.)</li>
+              <li>Anti-patterns and code smells</li>
+              <li>TODO/FIXME comments</li>
+              <li>God objects and circular dependencies</li>
+              <li>Naming consistency</li>
+              <li>Code duplication</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent pattern-recognition-specialist</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="code-simplicity-reviewer">
+            <div class="agent-detail-header">
+              <h3>code-simplicity-reviewer</h3>
+              <span class="agent-badge">Quality</span>
+            </div>
+            <p class="agent-detail-description">
+              Ensures code is as simple and minimal as possible. Applies YAGNI rigorously
+              and challenges unnecessary abstractions.
+            </p>
+            <h4>Simplification Checks</h4>
+            <ul>
+              <li>Analyze every line for necessity</li>
+              <li>Simplify complex logic</li>
+              <li>Remove redundancy and duplication</li>
+              <li>Challenge abstractions</li>
+              <li>Optimize for readability</li>
+              <li>Eliminate premature generalization</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent code-simplicity-reviewer</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Research Agents -->
+        <section id="research-agents">
+          <h2><i class="fa-solid fa-microscope"></i> Research Agents (4)</h2>
+          <p>Research agents that gather information from documentation, repositories, and git history to inform development decisions.</p>
+
+          <div class="agent-detail" id="framework-docs-researcher">
+            <div class="agent-detail-header">
+              <h3>framework-docs-researcher</h3>
+              <span class="agent-badge">Research</span>
+            </div>
+            <p class="agent-detail-description">
+              Gathers comprehensive documentation and best practices for frameworks, libraries, or dependencies.
+            </p>
+            <h4>Capabilities</h4>
+            <ul>
+              <li>Fetch official framework and library documentation</li>
+              <li>Identify version-specific constraints and deprecations</li>
+              <li>Search GitHub for real-world usage examples</li>
+              <li>Analyze gem/library source code using <code>bundle show</code></li>
+              <li>Synthesize findings with practical examples</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent framework-docs-researcher "Research Hotwire Turbo patterns"</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="best-practices-researcher">
+            <div class="agent-detail-header">
+              <h3>best-practices-researcher</h3>
+              <span class="agent-badge">Research</span>
+            </div>
+            <p class="agent-detail-description">
+              Researches and gathers external best practices, documentation, and examples for any technology.
+            </p>
+            <h4>Capabilities</h4>
+            <ul>
+              <li>Leverage multiple sources (Context7 MCP, web search, GitHub)</li>
+              <li>Evaluate information quality and recency</li>
+              <li>Synthesize into actionable guidance</li>
+              <li>Provide code examples and templates</li>
+              <li>Research issue templates and community engagement</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent best-practices-researcher "Find pagination patterns"</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="git-history-analyzer">
+            <div class="agent-detail-header">
+              <h3>git-history-analyzer</h3>
+              <span class="agent-badge">Git</span>
+            </div>
+            <p class="agent-detail-description">
+              Archaeological analysis of code repositories to understand evolution and patterns.
+            </p>
+            <h4>Analysis Techniques</h4>
+            <ul>
+              <li>Trace file evolution using <code>git log --follow</code></li>
+              <li>Determine code origins using <code>git blame -w -C -C -C</code></li>
+              <li>Identify patterns from commit history</li>
+              <li>Map key contributors and expertise areas</li>
+              <li>Extract historical patterns of issues and fixes</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent git-history-analyzer "Analyze changes to User model"</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="repo-research-analyst">
+            <div class="agent-detail-header">
+              <h3>repo-research-analyst</h3>
+              <span class="agent-badge">Research</span>
+            </div>
+            <p class="agent-detail-description">
+              Conducts thorough research on repository structure, documentation, and patterns.
+            </p>
+            <h4>Analysis Areas</h4>
+            <ul>
+              <li>Architecture and documentation files (ARCHITECTURE.md, README.md, CLAUDE.md)</li>
+              <li>GitHub issues for patterns and conventions</li>
+              <li>Issue/PR templates and guidelines</li>
+              <li>Implementation patterns using ast-grep or rg</li>
+              <li>Project-specific conventions</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent repo-research-analyst</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Workflow Agents -->
+        <section id="workflow-agents">
+          <h2><i class="fa-solid fa-gears"></i> Workflow Agents (6)</h2>
+          <p>Workflow agents that automate common development tasks like bug reproduction, PR resolution, and linting.</p>
+
+          <div class="agent-detail" id="bug-reproduction-validator">
+            <div class="agent-detail-header">
+              <h3>bug-reproduction-validator</h3>
+              <span class="agent-badge">Bugs</span>
+            </div>
+            <p class="agent-detail-description">
+              Verifies whether bug reports are actual bugs through systematic reproduction.
+              Classifies bugs and provides severity assessment.
+            </p>
+            <h4>Classification Types</h4>
+            <ul>
+              <li><strong>Confirmed</strong> - Bug reproduced successfully</li>
+              <li><strong>Cannot Reproduce</strong> - Unable to reproduce</li>
+              <li><strong>Not a Bug</strong> - Expected behavior</li>
+              <li><strong>Environmental</strong> - Environment-specific issue</li>
+              <li><strong>Data</strong> - Data-related issue</li>
+              <li><strong>User Error</strong> - User misunderstanding</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent bug-reproduction-validator</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="pr-comment-resolver">
+            <div class="agent-detail-header">
+              <h3>pr-comment-resolver</h3>
+              <span class="agent-badge">PR</span>
+            </div>
+            <p class="agent-detail-description">
+              Addresses code review comments by implementing requested changes and reporting resolutions.
+            </p>
+            <h4>Workflow</h4>
+            <ul>
+              <li>Analyze code review comments</li>
+              <li>Plan the resolution before implementation</li>
+              <li>Implement requested modifications</li>
+              <li>Verify resolution doesn't break functionality</li>
+              <li>Provide clear resolution reports</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent pr-comment-resolver</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="feedback-codifier">
+            <div class="agent-detail-header">
+              <h3>feedback-codifier</h3>
+              <span class="agent-badge">Knowledge</span>
+            </div>
+            <p class="agent-detail-description">
+              Analyzes code review feedback to extract patterns and update reviewer configurations.
+              Uses Opus model for deep analysis.
+            </p>
+            <h4>Capabilities</h4>
+            <ul>
+              <li>Extract core patterns from code reviews</li>
+              <li>Categorize by type (structure, testing, security, performance)</li>
+              <li>Formulate actionable guidelines</li>
+              <li>Update existing reviewer agents with new standards</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent feedback-codifier</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="lint">
+            <div class="agent-detail-header">
+              <h3>lint</h3>
+              <span class="agent-badge">Quality</span>
+            </div>
+            <p class="agent-detail-description">
+              Runs linting and code quality checks on Ruby and ERB files.
+              Uses Haiku model for efficiency.
+            </p>
+            <h4>Tools Run</h4>
+            <ul>
+              <li><code>bundle exec standardrb</code> - Ruby file checking/fixing</li>
+              <li><code>bundle exec erblint --lint-all</code> - ERB templates</li>
+              <li><code>bin/brakeman</code> - Security scanning</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent lint</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="spec-flow-analyzer">
+            <div class="agent-detail-header">
+              <h3>spec-flow-analyzer</h3>
+              <span class="agent-badge">Testing</span>
+            </div>
+            <p class="agent-detail-description">
+              Analyzes specifications and plans for user flows and gap identification.
+              Uses Sonnet model for analysis.
+            </p>
+            <h4>Analysis Areas</h4>
+            <ul>
+              <li>Map all possible user flows and permutations</li>
+              <li>Identify gaps, ambiguities, and missing specifications</li>
+              <li>Consider different user types, roles, permissions</li>
+              <li>Analyze error states and edge cases</li>
+              <li>Generate critical questions requiring clarification</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent spec-flow-analyzer</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="every-style-editor">
+            <div class="agent-detail-header">
+              <h3>every-style-editor</h3>
+              <span class="agent-badge">Content</span>
+            </div>
+            <p class="agent-detail-description">
+              Reviews and edits text content to conform to Every's specific style guide.
+            </p>
+            <h4>Style Checks</h4>
+            <ul>
+              <li>Title case in headlines, sentence case elsewhere</li>
+              <li>Company singular/plural usage</li>
+              <li>Remove overused words (actually, very, just)</li>
+              <li>Enforce active voice</li>
+              <li>Apply formatting rules (Oxford commas, em dashes)</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent every-style-editor</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Design Agents -->
+        <section id="design-agents">
+          <h2><i class="fa-solid fa-palette"></i> Design Agents (3)</h2>
+          <p>Design agents that help with UI implementation, Figma synchronization, and iterative design refinement.</p>
+
+          <div class="agent-detail" id="design-iterator">
+            <div class="agent-detail-header">
+              <h3>design-iterator</h3>
+              <span class="agent-badge">Design</span>
+            </div>
+            <p class="agent-detail-description">
+              Systematic UI/UX design refinement through iterative improvements.
+              Takes screenshots, analyzes, implements changes, and repeats.
+            </p>
+            <h4>Process</h4>
+            <ul>
+              <li>Take focused screenshots of target elements</li>
+              <li>Analyze current state and identify 3-5 improvements</li>
+              <li>Implement targeted CSS/design changes</li>
+              <li>Document changes made</li>
+              <li>Repeat for specified iterations (default 10)</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent design-iterator</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="figma-design-sync">
+            <div class="agent-detail-header">
+              <h3>figma-design-sync</h3>
+              <span class="agent-badge">Figma</span>
+            </div>
+            <p class="agent-detail-description">
+              Automatically detects and fixes visual differences between Figma designs and web implementations.
+              Uses Sonnet model.
+            </p>
+            <h4>Workflow</h4>
+            <ul>
+              <li>Extract design specifications from Figma</li>
+              <li>Capture implementation screenshots</li>
+              <li>Conduct systematic visual comparison</li>
+              <li>Make precise code changes to fix discrepancies</li>
+              <li>Verify implementation matches design</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent figma-design-sync</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="design-implementation-reviewer">
+            <div class="agent-detail-header">
+              <h3>design-implementation-reviewer</h3>
+              <span class="agent-badge">Review</span>
+            </div>
+            <p class="agent-detail-description">
+              Verifies UI implementations match Figma design specifications.
+              Uses Opus model for detailed analysis.
+            </p>
+            <h4>Comparison Areas</h4>
+            <ul>
+              <li>Layouts and structure</li>
+              <li>Typography (fonts, sizes, weights)</li>
+              <li>Colors and themes</li>
+              <li>Spacing and alignment</li>
+              <li>Different viewport sizes</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent design-implementation-reviewer</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Docs Agents -->
+        <section id="docs-agents">
+          <h2><i class="fa-solid fa-file-lines"></i> Documentation Agent (1)</h2>
+
+          <div class="agent-detail" id="ankane-readme-writer">
+            <div class="agent-detail-header">
+              <h3>ankane-readme-writer</h3>
+              <span class="agent-badge">Docs</span>
+            </div>
+            <p class="agent-detail-description">
+              Creates/updates README files following Ankane-style template for Ruby gems.
+              Optimized for conciseness with every sentence kept to 15 words or less.
+            </p>
+            <h4>Section Order</h4>
+            <ol>
+              <li>Header (title + description)</li>
+              <li>Installation</li>
+              <li>Quick Start</li>
+              <li>Usage</li>
+              <li>Options</li>
+              <li>Upgrading</li>
+              <li>Contributing</li>
+              <li>License</li>
+            </ol>
+            <h4>Style Guidelines</h4>
+            <ul>
+              <li>Imperative voice throughout</li>
+              <li>15 words max per sentence</li>
+              <li>Single-purpose code fences</li>
+              <li>Up to 4 badges maximum</li>
+              <li>No HTML comments</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent ankane-readme-writer</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Navigation -->
+        <nav class="docs-nav-footer">
+          <a href="getting-started.html" class="nav-prev">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title"><i class="fa-solid fa-arrow-left"></i> Getting Started</span>
+          </a>
+          <a href="commands.html" class="nav-next">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">Commands <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+        </nav>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    document.querySelector('[data-sidebar-toggle]')?.addEventListener('click', () => {
+      document.querySelector('.docs-sidebar').classList.toggle('open');
+    });
+  </script>
+</body>
+
+</html>

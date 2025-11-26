@@ -100,54 +100,124 @@
       </section>
 
       <!-- Philosophy Section -->
-      <section id="philosophy">
+      <section id="philosophy" class="philosophy-section">
         <div class="heading centered">
           <h2 class="no-top-margin">The Compounding Engineering Philosophy</h2>
-          <p class="paragraph m secondary">
+          <p class="paragraph l secondary balanced">
             Every unit of engineering work should make subsequent units of work easier&mdash;not harder.
-            Our tools embody this philosophy by learning from patterns, automating repetitive tasks,
-            and building institutional knowledge.
           </p>
         </div>
-        <div class="cards-with-icons-container">
-          <div class="card-with-icon">
-            <div class="fa-solid fa-brain icon xl color-accent"></div>
-            <div class="feature-heading">
-              <p class="paragraph m bold">Plan</p>
-              <p class="paragraph s secondary">
-                Understand the change needed and its impact before writing any code.
-                Use research agents to gather context and best practices.
+
+        <!-- Philosophy Quote -->
+        <div class="philosophy-quote">
+          <blockquote>
+            "Most engineering creates linear value: you build a feature, it works, done.
+            Compounding engineering creates exponential value: each solved problem teaches the system,
+            each pattern becomes reusable, each review strengthens future reviews."
+          </blockquote>
+        </div>
+
+        <!-- The Four Pillars -->
+        <div class="philosophy-pillars">
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-brain"></i></div>
+            <div class="pillar-content">
+              <h3>Plan</h3>
+              <p class="pillar-tagline">Understand before you build</p>
+              <p class="pillar-description">
+                Before writing a single line of code, gather context. Research agents explore
+                documentation, analyze git history, and find best practices. The <code>/workflows:plan</code>
+                command orchestrates 3 research agents in parallel to create comprehensive implementation plans.
               </p>
+              <div class="pillar-tools">
+                <span class="tool-tag">framework-docs-researcher</span>
+                <span class="tool-tag">best-practices-researcher</span>
+                <span class="tool-tag">repo-research-analyst</span>
+                <span class="tool-tag">git-history-analyzer</span>
+              </div>
             </div>
           </div>
-          <div class="card-with-icon">
-            <div class="fa-solid fa-robot icon xl color-accent"></div>
-            <div class="feature-heading">
-              <p class="paragraph m bold">Delegate</p>
-              <p class="paragraph s secondary">
-                Use specialized AI agents to help with implementation.
-                Each agent brings deep expertise in its domain.
+
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-robot"></i></div>
+            <div class="pillar-content">
+              <h3>Delegate</h3>
+              <p class="pillar-tagline">Leverage specialized expertise</p>
+              <p class="pillar-description">
+                Each agent brings deep domain knowledge. The <code>kieran-rails-reviewer</code> knows Rails
+                conventions like an expert. The <code>security-sentinel</code> catches OWASP vulnerabilities.
+                The <code>/workflows:work</code> command executes plans while maintaining quality gates.
               </p>
+              <div class="pillar-tools">
+                <span class="tool-tag">24 specialized agents</span>
+                <span class="tool-tag">/workflows:work</span>
+                <span class="tool-tag">dhh-ruby-style skill</span>
+                <span class="tool-tag">git-worktree skill</span>
+              </div>
             </div>
           </div>
-          <div class="card-with-icon">
-            <div class="fa-solid fa-magnifying-glass icon xl color-accent"></div>
-            <div class="feature-heading">
-              <p class="paragraph m bold">Assess</p>
-              <p class="paragraph s secondary">
-                Run comprehensive reviews with multiple perspectives.
-                Security, performance, architecture&mdash;all covered.
+
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div class="pillar-content">
+              <h3>Assess</h3>
+              <p class="pillar-tagline">Multiple perspectives, comprehensive coverage</p>
+              <p class="pillar-description">
+                The <code>/workflows:review</code> command launches 12+ review agents in parallel: security,
+                performance, architecture, data integrity, patterns, and more. Findings are categorized by
+                severity (P1/P2/P3) and stored as actionable todo files.
               </p>
+              <div class="pillar-tools">
+                <span class="tool-tag">security-sentinel</span>
+                <span class="tool-tag">performance-oracle</span>
+                <span class="tool-tag">architecture-strategist</span>
+                <span class="tool-tag">data-integrity-guardian</span>
+              </div>
             </div>
           </div>
-          <div class="card-with-icon">
-            <div class="fa-solid fa-book icon xl color-accent"></div>
-            <div class="feature-heading">
-              <p class="paragraph m bold">Codify</p>
-              <p class="paragraph s secondary">
-                Document learnings and patterns for future use.
-                Each solved problem becomes reusable knowledge.
+
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-book"></i></div>
+            <div class="pillar-content">
+              <h3>Codify</h3>
+              <p class="pillar-tagline">Turn solutions into knowledge</p>
+              <p class="pillar-description">
+                Every solved problem should teach the system. The <code>/workflows:codify</code> command
+                captures solutions as searchable documentation. The <code>feedback-codifier</code> agent
+                extracts patterns from code reviews to improve future reviews.
               </p>
+              <div class="pillar-tools">
+                <span class="tool-tag">/workflows:codify</span>
+                <span class="tool-tag">codify-docs skill</span>
+                <span class="tool-tag">feedback-codifier</span>
+                <span class="tool-tag">file-todos skill</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- How It Compounds -->
+        <div class="compound-effect">
+          <h3><i class="fa-solid fa-chart-line color-accent"></i> The Compounding Effect</h3>
+          <div class="compound-grid">
+            <div class="compound-item">
+              <div class="compound-number">Day 1</div>
+              <div class="compound-text">Install plugin, run first review</div>
+            </div>
+            <div class="compound-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="compound-item">
+              <div class="compound-number">Week 1</div>
+              <div class="compound-text">Patterns documented, todos organized</div>
+            </div>
+            <div class="compound-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="compound-item">
+              <div class="compound-number">Month 1</div>
+              <div class="compound-text">Knowledge base growing, reviews faster</div>
+            </div>
+            <div class="compound-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="compound-item highlight">
+              <div class="compound-number">Ongoing</div>
+              <div class="compound-text">Each task easier than the last</div>
             </div>
           </div>
         </div>
