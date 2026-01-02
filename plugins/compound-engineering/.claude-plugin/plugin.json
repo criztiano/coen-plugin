@@ -1,6 +1,6 @@
 {
   "name": "compound-engineering",
-  "version": "2.19.0",
+  "version": "2.20.0",
   "description": "AI-powered development tools. 27 agents, 20 commands, 13 skills, 2 MCP servers for code review, research, design, and workflow automation.",
   "author": {
     "name": "Kieran Klaassen",

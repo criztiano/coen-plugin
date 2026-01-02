@@ -5,6 +5,24 @@ All notable changes to the compound-engineering plugin will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.20.0] - 2026-01-01
+
+### Changed
+
+- **`create-agent-skills` skill** - Complete rewrite to match Anthropic's official skill specification:
+  - **Format change**: Skills now use standard markdown headings (`## Quick Start`, `## Instructions`), NOT XML tags. The previous version incorrectly recommended XML tags which is not the official format.
+  - **Naming convention**: Updated to use gerund form (`creating-agent-skills`, `processing-pdfs`) per official spec
+  - **Description format**: Must be third person, include both what and when to use
+  - Added `references/official-spec.md` - Anthropic's official skill specification from code.claude.com/docs/en/skills
+  - Added `references/best-practices.md` - Skill authoring best practices from platform.claude.com
+  - Removed obsolete `references/use-xml-tags.md` - this was incorrect guidance
+
+### Philosophy
+
+This update aligns the skill with Anthropic's official documentation. The key insight: **Skills are prompts**. All standard prompting best practices apply. Use standard markdown, not custom XML tags. Keep SKILL.md under 500 lines with progressive disclosure to reference files.
+
+---
+
 ## [2.19.0] - 2025-12-31
 
 ### Added
