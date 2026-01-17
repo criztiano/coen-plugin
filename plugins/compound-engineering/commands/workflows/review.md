@@ -54,9 +54,7 @@ Ensure that the code is ready for analysis (either in worktree or on current bra
 
 Run ALL or most of these agents at the same time:
 
-1. Task senior-rails-reviewer(PR content)
-3. If turbo is used: Task rails-turbo-expert(PR content)
-4. Task git-history-analyzer(PR content)
+1. Task git-history-analyzer(PR content)
 5. Task dependency-detective(PR content)
 6. Task pattern-recognition-specialist(PR content)
 7. Task architecture-strategist(PR content)
@@ -75,15 +73,15 @@ Run ALL or most of these agents at the same time:
 
 These agents are run ONLY when the PR matches specific criteria. Check the PR files list to determine if they apply:
 
-**If PR contains database migrations (db/migrate/*.rb files) or data backfills:**
+**If PR contains database migrations or data backfills:**
 
 14. Task data-migration-expert(PR content) - Validates ID mappings match production, checks for swapped values, verifies rollback safety
 15. Task deployment-verification-agent(PR content) - Creates Go/No-Go deployment checklist with SQL verification queries
 
 **When to run migration agents:**
-- PR includes files matching `db/migrate/*.rb`
+- PR includes database migration files (e.g., `db/migrate/*.rb`, `migrations/*.sql`, Prisma migrations)
 - PR modifies columns that store IDs, enums, or mappings
-- PR includes data backfill scripts or rake tasks
+- PR includes data backfill scripts
 - PR changes how data is read/written (e.g., changing from FK to string column)
 - PR title/body mentions: migration, backfill, data transformation, ID mapping
 
@@ -366,11 +364,11 @@ After creating all todo files, present comprehensive summary:
 
 ### Review Agents Used:
 
-- senior-rails-reviewer
 - security-sentinel
 - performance-oracle
 - architecture-strategist
 - agent-native-reviewer
+- code-simplicity-reviewer
 - [other agents]
 
 ### Next Steps:
