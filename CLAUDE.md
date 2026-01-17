@@ -345,14 +345,6 @@ Follow these patterns for commit messages:
 - `Fix [issue]` - Bug fixes
 - `Simplify [component] to [improvement]` - Refactoring
 
-Include the Claude Code footer:
-
-```
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-```
-
 ## Resources to search for when needing more information
 
 - [Claude Code Plugin Documentation](https://docs.claude.com/en/docs/claude-code/plugins)

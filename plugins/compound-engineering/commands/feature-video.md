@@ -214,11 +214,12 @@ rclone listremotes
 
 # Upload video, preview GIF, and screenshots to cloud storage
 # Use --s3-no-check-bucket to avoid permission errors
-rclone copy tmp/videos/ r2:kieran-claude/pr-videos/pr-[number]/ --s3-no-check-bucket --progress
-rclone copy tmp/screenshots/ r2:kieran-claude/pr-videos/pr-[number]/screenshots/ --s3-no-check-bucket --progress
+# Configure your own bucket in rclone (r2:your-bucket, s3:your-bucket, etc.)
+rclone copy tmp/videos/ r2:your-bucket/pr-videos/pr-[number]/ --s3-no-check-bucket --progress
+rclone copy tmp/screenshots/ r2:your-bucket/pr-videos/pr-[number]/screenshots/ --s3-no-check-bucket --progress
 
 # List uploaded files
-rclone ls r2:kieran-claude/pr-videos/pr-[number]/
+rclone ls r2:your-bucket/pr-videos/pr-[number]/
 ```
 
 Public URLs (R2 with public access):
