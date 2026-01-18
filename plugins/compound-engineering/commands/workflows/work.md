@@ -197,19 +197,12 @@ This command takes a work document (plan, specification, or todo file) and execu
    - **Modified screens**: Before AND after screenshots
    - **Design implementation**: Screenshot showing Figma design match
 
-   **IMPORTANT**: Always include uploaded image URLs in PR description. This provides visual context for reviewers and documents the change.
+   **IMPORTANT**: Save screenshot URLs for the PR description later.
 
-3. **Push Changes for Review**
+3. **Next Step: Review**
 
-   ```bash
-   git push -u origin feature-branch-name
-   ```
-
-4. **Next Step: Review**
-
-   Run `/workflows:review` to analyze your changes before creating the PR.
-   The review will catch issues early and create todos for any findings.
-   Once review passes and findings are resolved, create the PR.
+   Run `/workflows:review` to analyze your changes.
+   Review will automatically resolve findings, then push and create the PR.
 
 ---
 
