@@ -3,12 +3,11 @@
   "version": "2.26.4",
   "description": "AI-powered development tools. 23 agents, 22 commands, 10 skills, 1 MCP server for code review, research, design, and workflow automation.",
   "author": {
-    "name": "Kieran Klaassen",
-    "email": "kieran@every.to",
-    "url": "https://github.com/kieranklaassen"
+    "name": "Cristiano",
+    "url": "https://github.com/criztiano"
   },
-  "homepage": "https://every.to/source-code/my-ai-had-already-fixed-the-code-before-i-saw-it",
-  "repository": "https://github.com/EveryInc/every-marketplace",
+  "homepage": "https://github.com/criztiano/coen-plugin",
+  "repository": "https://github.com/criztiano/coen-plugin",
   "license": "MIT",
   "keywords": [
     "ai-powered",
