@@ -50,46 +50,54 @@ Ensure that the code is ready for analysis (either in worktree or on current bra
 
 #### Parallel Agents to review the PR:
 
-<parallel_tasks>
+<core_agents>
 
-Run ALL or most of these agents at the same time:
+**Always run these universal agents:**
 
 1. Task git-history-analyzer(PR content)
-5. Task dependency-detective(PR content)
-6. Task pattern-recognition-specialist(PR content)
-7. Task architecture-strategist(PR content)
-8. Task code-philosopher(PR content)
-9. Task security-sentinel(PR content)
-10. Task performance-oracle(PR content)
-11. Task devops-harmony-analyst(PR content)
-12. Task data-integrity-guardian(PR content)
-13. Task agent-native-reviewer(PR content) - Verify new features are agent-accessible
+2. Task security-sentinel(PR content)
+3. Task architecture-strategist(PR content)
+4. Task code-simplicity-reviewer(PR content)
 
-</parallel_tasks>
+</core_agents>
 
-#### Conditional Agents (Run if applicable):
+<language_agents>
 
-<conditional_agents>
+**Detect language/framework from PR files and run matching agents:**
 
-These agents are run ONLY when the PR matches specific criteria. Check the PR files list to determine if they apply:
+| File Patterns | Agents to Run |
+|--------------|---------------|
+| `*.ts`, `*.tsx`, `*.js`, `*.jsx` | Task senior-typescript-reviewer(PR content) |
+| `*.py` | Task senior-python-reviewer(PR content) |
+| `*.tsx`, `*.jsx`, `components/*` | Task frontend-races-reviewer(PR content) |
+| `*.swift`, `*.xcodeproj` | Task performance-oracle(PR content) |
 
-**If PR contains database migrations or data backfills:**
+**Detection logic:**
+```bash
+# Check which files are in the PR
+git diff --name-only origin/main...HEAD | head -20
+```
 
-14. Task data-migration-expert(PR content) - Validates ID mappings match production, checks for swapped values, verifies rollback safety
-15. Task deployment-verification-agent(PR content) - Creates Go/No-Go deployment checklist with SQL verification queries
+Run ONLY the agents that match the PR's languages. Skip agents for languages not present.
 
-**When to run migration agents:**
-- PR includes database migration files (e.g., `db/migrate/*.rb`, `migrations/*.sql`, Prisma migrations)
-- PR modifies columns that store IDs, enums, or mappings
-- PR includes data backfill scripts
-- PR changes how data is read/written (e.g., changing from FK to string column)
-- PR title/body mentions: migration, backfill, data transformation, ID mapping
+</language_agents>
 
-**What these agents check:**
-- `data-migration-expert`: Verifies hard-coded mappings match production reality (prevents swapped IDs), checks for orphaned associations, validates dual-write patterns
-- `deployment-verification-agent`: Produces executable pre/post-deploy checklists with SQL queries, rollback procedures, and monitoring plans
+<feature_agents>
 
-</conditional_agents>
+**Run based on PR content/features:**
+
+| Condition | Agents to Run |
+|-----------|---------------|
+| PR touches API endpoints or data flow | Task data-integrity-guardian(PR content) |
+| PR adds new user-facing features | Task agent-native-reviewer(PR content) |
+| PR modifies CI/CD, Docker, or infra | Task devops-harmony-analyst(PR content) |
+| PR includes database migrations | Task data-migration-expert(PR content), Task deployment-verification-agent(PR content) |
+
+**Migration detection patterns:**
+- `db/migrate/*`, `migrations/*.sql`, `prisma/migrations/*`
+- PR title/body mentions: migration, backfill, data transformation
+
+</feature_agents>
 
 ### 4. Ultra-Thinking Deep Dive Phases
 
