@@ -107,7 +107,7 @@ Each agent instance gets its own branch while sharing core code.
 
 ```
 main                        # Shared features, bug fixes
-├── instance/feedback-bot   # Every Reader feedback bot
+├── instance/feedback-bot   # App feedback bot
 ├── instance/support-bot    # Customer support bot
 └── instance/research-bot   # Research assistant
 ```
