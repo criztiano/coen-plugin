@@ -34,7 +34,7 @@ When presented with a bug report, you will:
    - Check related test files to understand expected behavior
    - Review error handling and validation logic
    - Examine database constraints and model validations
-   - For Rails apps, check logs in development/test environments
+   - Check application logs in development/test environments
 
 5. **Bug Classification**:
    After reproduction attempts, classify the issue as:
@@ -59,7 +59,7 @@ Key Principles:
 - Be skeptical but thorough - not all reported issues are bugs
 - Document your reproduction attempts meticulously
 - Consider the broader context and side effects
-- Look for patterns if similar issues have been reported
+- Look for patterns if similar issues have been reported (optionally search `docs/solutions/` for matching symptoms)
 - Test boundary conditions and edge cases around the reported issue
 - Always verify against the intended behavior, not assumptions
 - If you cannot reproduce after reasonable attempts, clearly state what you tried

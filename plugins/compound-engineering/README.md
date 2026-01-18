@@ -6,16 +6,16 @@ AI-powered development tools that get smarter with every use. Make each unit of 
 
 | Component | Count |
 |-----------|-------|
-| Agents | 27 |
-| Commands | 20 |
-| Skills | 14 |
+| Agents | 23 |
+| Commands | 22 |
+| Skills | 10 |
 | MCP Servers | 1 |
 
 ## Agents
 
 Agents are organized into categories for easier discovery.
 
-### Review (14)
+### Review (12)
 
 | Agent | Description |
 |-------|-------------|
@@ -25,14 +25,12 @@ Agents are organized into categories for easier discovery.
 | `data-integrity-guardian` | Database migrations and data integrity |
 | `data-migration-expert` | Validate ID mappings match production, check for swapped values |
 | `deployment-verification-agent` | Create Go/No-Go deployment checklists for risky data changes |
-| `dhh-rails-reviewer` | Rails review from DHH's perspective |
-| `kieran-rails-reviewer` | Rails code review with strict conventions |
-| `kieran-python-reviewer` | Python code review with strict conventions |
-| `kieran-typescript-reviewer` | TypeScript code review with strict conventions |
+| `senior-python-reviewer` | Python code review with strict conventions |
+| `senior-typescript-reviewer` | TypeScript code review with strict conventions |
 | `pattern-recognition-specialist` | Analyze code for patterns and anti-patterns |
 | `performance-oracle` | Performance analysis and optimization |
 | `security-sentinel` | Security audits and vulnerability assessments |
-| `julik-frontend-races-reviewer` | Review JavaScript/Stimulus code for race conditions |
+| `frontend-races-reviewer` | Review JavaScript/Stimulus code for race conditions |
 
 ### Research (4)
 
@@ -51,21 +49,14 @@ Agents are organized into categories for easier discovery.
 | `design-iterator` | Iteratively refine UI through systematic design iterations |
 | `figma-design-sync` | Synchronize web implementations with Figma designs |
 
-### Workflow (5)
+### Workflow (4)
 
 | Agent | Description |
 |-------|-------------|
 | `bug-reproduction-validator` | Systematically reproduce and validate bug reports |
-| `every-style-editor` | Edit content to conform to Every's style guide |
-| `lint` | Run linting and code quality checks on Ruby and ERB files |
+| `lint` | Run linting and code quality checks |
 | `pr-comment-resolver` | Address PR comments and implement fixes |
 | `spec-flow-analyzer` | Analyze user flows and identify gaps in specifications |
-
-### Docs (1)
-
-| Agent | Description |
-|-------|-------------|
-| `ankane-readme-writer` | Create READMEs following Ankane-style template for Ruby gems |
 
 ## Commands
 
@@ -90,7 +81,6 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 | `/generate_command` | Generate new slash commands |
 | `/heal-skill` | Fix skill documentation issues |
 | `/plan_review` | Multi-agent plan review in parallel |
-| `/report-bug` | Report a bug in the plugin |
 | `/reproduce-bug` | Reproduce bugs using logs and console |
 | `/resolve_parallel` | Resolve TODO comments in parallel |
 | `/resolve_pr_parallel` | Resolve PR comments in parallel |
@@ -112,11 +102,8 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 
 | Skill | Description |
 |-------|-------------|
-| `andrew-kane-gem-writer` | Write Ruby gems following Andrew Kane's patterns |
 | `compound-docs` | Capture solved problems as categorized documentation |
 | `create-agent-skills` | Expert guidance for creating Claude Code skills |
-| `dhh-rails-style` | Write Ruby/Rails code in DHH's 37signals style |
-| `dspy-ruby` | Build type-safe LLM applications with DSPy.rb |
 | `frontend-design` | Create production-grade frontend interfaces |
 | `skill-creator` | Guide for creating effective Claude Code skills |
 
@@ -124,7 +111,6 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 
 | Skill | Description |
 |-------|-------------|
-| `every-style-editor` | Review copy for Every's style guide compliance |
 | `file-todos` | File-based todo tracking system |
 | `git-worktree` | Manage Git worktrees for parallel development |
 
@@ -168,7 +154,7 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 - `resolve-library-id` - Find library ID for a framework/package
 - `get-library-docs` - Get documentation for a specific library
 
-Supports 100+ frameworks including Rails, React, Next.js, Vue, Django, Laravel, and more.
+Supports 100+ frameworks including React, Next.js, Vue, Django, FastAPI, Swift, and more.
 
 MCP servers start automatically when the plugin is enabled.
 

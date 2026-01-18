@@ -116,8 +116,8 @@ This command takes a work document (plan, specification, or todo file) and execu
    Always run before submitting:
 
    ```bash
-   # Run full test suite
-   bin/rails test
+   # Run full test suite (use project's test command)
+   # Examples: npm test, pytest, go test, bin/rails test, etc.
 
    # Run linting (per CLAUDE.md)
    # Use linting-agent before pushing to origin
@@ -128,16 +128,15 @@ This command takes a work document (plan, specification, or todo file) and execu
    Use for complex, risky, or large changes:
 
    - **code-simplicity-reviewer**: Check for unnecessary complexity
-   - **kieran-rails-reviewer**: Verify Rails conventions (Rails projects)
    - **performance-oracle**: Check for performance issues
    - **security-sentinel**: Scan for security vulnerabilities
-   - **cora-test-reviewer**: Review test quality (CORA projects)
+   - **architecture-strategist**: Review architectural decisions
 
    Run reviewers in parallel with Task tool:
 
    ```
    Task(code-simplicity-reviewer): "Review changes for simplicity"
-   Task(kieran-rails-reviewer): "Check Rails conventions"
+   Task(security-sentinel): "Scan for security issues"
    ```
 
    Present findings to user and address critical issues.
@@ -164,10 +163,6 @@ This command takes a work document (plan, specification, or todo file) and execu
    feat(scope): description of what and why
 
    Brief explanation if needed.
-
-   🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-   Co-Authored-By: Claude <noreply@anthropic.com>
    EOF
    )"
    ```
@@ -178,12 +173,12 @@ This command takes a work document (plan, specification, or todo file) and execu
 
    **Step 1: Start dev server** (if not running)
    ```bash
-   bin/dev  # Run in background
+   # Use your project's dev server command (e.g., npm run dev, bin/dev, etc.)
    ```
 
    **Step 2: Capture screenshots with agent-browser CLI**
    ```bash
-   agent-browser open http://localhost:3000/[route]
+   agent-browser open http://localhost:[port]/[route]
    agent-browser snapshot -i
    agent-browser screenshot output.png
    ```
@@ -226,10 +221,6 @@ This command takes a work document (plan, specification, or todo file) and execu
 
    ## Figma Design
    [Link if applicable]
-
-   ---
-
-   [![Compound Engineered](https://img.shields.io/badge/Compound-Engineered-6366f1)](https://github.com/EveryInc/compound-engineering-plugin) 🤖 Generated with [Claude Code](https://claude.com/claude-code)
    EOF
    )"
    ```
@@ -281,14 +272,13 @@ Before creating PR, verify:
 
 - [ ] All clarifying questions asked and answered
 - [ ] All TodoWrite tasks marked completed
-- [ ] Tests pass (run `bin/rails test`)
+- [ ] Tests pass (run project's test command)
 - [ ] Linting passes (use linting-agent)
 - [ ] Code follows existing patterns
 - [ ] Figma designs match implementation (if applicable)
 - [ ] Before/after screenshots captured and uploaded (for UI changes)
 - [ ] Commit messages follow conventional format
 - [ ] PR description includes summary, testing notes, and screenshots
-- [ ] PR description includes Compound Engineered badge
 
 ## When to Use Reviewer Agents
 

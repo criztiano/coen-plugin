@@ -273,7 +273,7 @@ python -m http.server 8000
 3. Test agents and commands:
    ```bash
    claude /review
-   claude agent kieran-rails-reviewer "test message"
+   claude agent architecture-strategist "test message"
    ```
 
 ### Validate JSON
@@ -344,14 +344,6 @@ Follow these patterns for commit messages:
 - `Update [file] to [what changed]` - Updating existing files
 - `Fix [issue]` - Bug fixes
 - `Simplify [component] to [improvement]` - Refactoring
-
-Include the Claude Code footer:
-
-```
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-```
 
 ## Resources to search for when needing more information
 

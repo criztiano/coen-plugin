@@ -1,24 +1,23 @@
 {
-  "name": "every-marketplace",
+  "name": "coen-marketplace",
   "owner": {
-    "name": "Every Inc.",
-    "url": "https://github.com/EveryInc"
+    "name": "Cristiano",
+    "url": "https://github.com/criztiano"
   },
   "metadata": {
-    "description": "Official Every plugin marketplace for Claude Code extensions",
+    "description": "Plugin marketplace for Claude Code extensions",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "compound-engineering",
-      "description": "AI-powered development tools that get smarter with every use. Make each unit of engineering work easier than the last. Includes 27 specialized agents, 20 commands, and 12 skills.",
-      "version": "2.21.0",
+      "description": "AI-powered development tools that get smarter with every use. Make each unit of engineering work easier than the last. Includes 23 specialized agents, 22 commands, and 10 skills.",
+      "version": "2.26.4",
       "author": {
-        "name": "Kieran Klaassen",
-        "url": "https://github.com/kieranklaassen",
-        "email": "kieran@every.to"
+        "name": "Cristiano",
+        "url": "https://github.com/criztiano"
       },
-      "homepage": "https://github.com/EveryInc/compound-engineering-plugin",
+      "homepage": "https://github.com/criztiano/coen-plugin",
       "tags": ["ai-powered", "compound-engineering", "workflow-automation", "code-review", "quality", "knowledge-management", "image-generation"],
       "source": "./plugins/compound-engineering"
     },
@@ -29,7 +28,7 @@
       "author": {
         "name": "Nityesh Agarwal"
       },
-      "homepage": "https://github.com/EveryInc/compound-engineering-plugin",
+      "homepage": "https://github.com/criztiano/coen-plugin",
       "tags": ["coding", "programming", "tutorial", "learning", "spaced-repetition", "education"],
       "source": "./plugins/coding-tutor"
     }
