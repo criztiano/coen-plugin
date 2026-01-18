@@ -379,55 +379,52 @@ After creating all todo files, present comprehensive summary:
 - code-simplicity-reviewer
 - [other agents]
 
-### Next Steps:
+### 6. Auto-Resolve Findings
 
-1. **Address P1 Findings**: CRITICAL - must be fixed before merge
+Automatically resolve all P1 and P2 findings before creating the PR.
 
-   - Review each P1 todo in detail
-   - Implement fixes or request exemption
-   - Verify fixes before merging PR
+**Step 1: Resolve P1 findings first (CRITICAL)**
 
-2. **Triage All Todos**:
-   ```bash
-   ls todos/*-pending-*.md  # View all pending todos
-   /triage                  # Use slash command for interactive triage
-   ```
-````
+For each P1 todo, spawn a sub-agent to fix it:
 
-3. **Work on Approved Todos**:
+```bash
+# Process P1 findings in parallel
+Task("Fix P1 finding: [description from todo]. Read the todo file for context and implement the fix.")
+```
 
-   ```bash
-   /resolve_todo_parallel  # Fix all approved items efficiently
-   ```
-
-4. **Track Progress**:
-   - Rename file when status changes: pending → ready → complete
-   - Update Work Log as you work
-   - Commit todos: `git add todos/ && git commit -m "refactor: add code review findings"`
-
-### Severity Breakdown:
-
-**🔴 P1 (Critical - Blocks Merge):**
-
+P1 findings include:
 - Security vulnerabilities
 - Data corruption risks
 - Breaking changes
 - Critical architectural issues
 
-**🟡 P2 (Important - Should Fix):**
+**Step 2: Resolve P2 findings**
 
+After P1s are complete, resolve P2 findings in parallel:
+
+```bash
+# Process P2 findings in parallel
+Task("Fix P2 finding: [description from todo]. Read the todo file for context and implement the fix.")
+```
+
+P2 findings include:
 - Performance issues
 - Significant architectural concerns
 - Major code quality problems
-- Reliability issues
 
-**🔵 P3 (Nice-to-Have):**
+**Step 3: Note P3 findings (optional fixes)**
 
+P3 findings are nice-to-have. List them in the PR description but don't block on them:
 - Minor improvements
 - Code cleanup
 - Optimization opportunities
-- Documentation updates
 
+**Step 4: Mark todos complete**
+
+After fixing each finding:
+```bash
+# Rename to mark complete
+mv todos/001-pending-p1-*.md todos/001-complete-p1-*.md
 ```
 
 ### 7. End-to-End Testing (Optional)
@@ -513,7 +510,55 @@ The subagent will:
 
 **Standalone:** `/xcode-test [scheme]`
 
-### Important: P1 Findings Block Merge
+### 8. Commit, Push, and Create PR
 
-Any **🔴 P1 (CRITICAL)** findings must be addressed before merging the PR. Present these prominently and ensure they're resolved before accepting the PR.
+Once all P1/P2 findings are resolved:
+
+**Step 1: Commit all changes**
+
+```bash
+git add .
+git commit -m "$(cat <<'EOF'
+feat: [Description of feature]
+
+- Implemented [main feature]
+- Resolved review findings (P1/P2)
+
+Review completed: security, architecture, code quality
+EOF
+)"
 ```
+
+**Step 2: Push to remote**
+
+```bash
+git push -u origin [branch-name]
+```
+
+**Step 3: Create Pull Request**
+
+```bash
+gh pr create --title "feat: [Description]" --body "$(cat <<'EOF'
+## Summary
+- What was built
+- Key decisions made
+
+## Review Completed
+- [X] Security review passed
+- [X] Architecture review passed
+- [X] P1 findings resolved
+- [X] P2 findings resolved
+- [X] Tests pass
+
+## P3 Findings (Optional)
+- [ ] [List any P3 findings for future consideration]
+
+## Screenshots
+| Before | After |
+|--------|-------|
+| ![before](URL) | ![after](URL) |
+EOF
+)"
+```
+
+The PR is now ready for human review and merge.
