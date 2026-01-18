@@ -48,51 +48,130 @@ Ensure that the code is ready for analysis (either in worktree or on current bra
 
 </task_list>
 
-#### Parallel Agents to review the PR:
+#### Step 2: Detect Languages & Frameworks from PR Files
+
+<language_detection>
+
+**CRITICAL: Before spawning ANY review agents, detect what's in the PR.**
+
+Run this detection first:
+```bash
+gh pr view [PR_NUMBER] --json files -q '.files[].path'
+```
+
+Then categorize the changed files:
+
+| File Pattern | Language/Framework | Reviewers to Spawn |
+|--------------|-------------------|-------------------|
+| `*.rb`, `Gemfile*`, `*.erb`, `config/*.rb` | Ruby/Rails | `kieran-rails-reviewer`, `dhh-rails-reviewer` |
+| `*.ts`, `*.tsx` | TypeScript | `kieran-typescript-reviewer` |
+| `*.js`, `*.jsx`, `*.vue`, `*.svelte` | JavaScript/Frontend | `julik-frontend-races-reviewer` |
+| `*.py`, `requirements*.txt`, `pyproject.toml` | Python | `kieran-python-reviewer` |
+| `db/migrate/*.rb`, `*_migration.rb` | Database Migration | `data-migration-expert`, `deployment-verification-agent` |
+| `*.sql`, `schema.rb`, `structure.sql` | Database Schema | `data-integrity-guardian` |
+| `Dockerfile*`, `*.yml` (CI), `terraform/*` | DevOps/Infra | `deployment-verification-agent` |
+| Any code files | General | `security-sentinel`, `architecture-strategist` |
+
+</language_detection>
+
+#### Step 3: Spawn ONLY Relevant Review Agents
+
+<smart_agent_selection>
+
+**DO NOT run all agents. Select based on detection above.**
+
+**Always run (for any code PR):**
+- `security-sentinel` - Security is always relevant
+- `architecture-strategist` - Architecture concerns apply universally
+- `code-simplicity-reviewer` - Simplification applies to all code
+
+**Language-specific reviewers (pick based on detected languages):**
+
+| If PR contains... | Spawn these reviewers |
+|-------------------|----------------------|
+| Ruby/Rails files | `kieran-rails-reviewer`, `dhh-rails-reviewer` |
+| TypeScript files | `kieran-typescript-reviewer` |
+| Python files | `kieran-python-reviewer` |
+| Frontend JS/CSS | `julik-frontend-races-reviewer` |
+
+**Domain-specific reviewers (pick based on PR content):**
+
+| If PR contains... | Spawn these reviewers |
+|-------------------|----------------------|
+| Database migrations (`db/migrate/*`) | `data-migration-expert`, `deployment-verification-agent` |
+| Data model changes | `data-integrity-guardian` |
+| Performance-sensitive code (loops, queries, caching) | `performance-oracle` |
+| Agent/AI features | `agent-native-reviewer` |
+| Complex patterns/refactoring | `pattern-recognition-specialist` |
+
+**Research agents (spawn 1 max):**
+- `git-history-analyzer` - Only if PR touches files with complex history
+
+</smart_agent_selection>
+
+#### Example: Smart Agent Selection
+
+<example_selection>
+
+**PR with only TypeScript files:**
+```
+Detected: *.ts, *.tsx files
+Spawning:
+- kieran-typescript-reviewer ✅
+- security-sentinel ✅
+- architecture-strategist ✅
+- code-simplicity-reviewer ✅
+
+NOT spawning (not relevant):
+- kieran-rails-reviewer ❌
+- kieran-python-reviewer ❌
+- dhh-rails-reviewer ❌
+- data-migration-expert ❌
+```
+
+**PR with Rails + database migration:**
+```
+Detected: *.rb, db/migrate/*.rb
+Spawning:
+- kieran-rails-reviewer ✅
+- dhh-rails-reviewer ✅
+- data-migration-expert ✅
+- deployment-verification-agent ✅
+- data-integrity-guardian ✅
+- security-sentinel ✅
+- architecture-strategist ✅
+- code-simplicity-reviewer ✅
+
+NOT spawning:
+- kieran-typescript-reviewer ❌
+- kieran-python-reviewer ❌
+```
+
+**PR with only README/docs changes:**
+```
+Detected: *.md files only
+Spawning: NONE - documentation-only PR
+Action: Simple review without agents, or skip review entirely
+```
+
+</example_selection>
+
+#### Parallel Agent Execution
 
 <parallel_tasks>
 
-Run ALL or most of these agents at the same time:
+After detection, run the selected agents in parallel:
 
-1. Task kieran-rails-reviewer(PR content)
-2. Task dhh-rails-reviewer(PR title)
-3. If turbo is used: Task rails-turbo-expert(PR content)
-4. Task git-history-analyzer(PR content)
-5. Task dependency-detective(PR content)
-6. Task pattern-recognition-specialist(PR content)
-7. Task architecture-strategist(PR content)
-8. Task code-philosopher(PR content)
-9. Task security-sentinel(PR content)
-10. Task performance-oracle(PR content)
-11. Task devops-harmony-analyst(PR content)
-12. Task data-integrity-guardian(PR content)
-13. Task agent-native-reviewer(PR content) - Verify new features are agent-accessible
+```
+Task [selected-reviewer-1](PR content)
+Task [selected-reviewer-2](PR content)
+Task [selected-reviewer-3](PR content)
+... only the relevant ones
+```
+
+**Token savings:** A TypeScript-only PR now spawns ~4 agents instead of ~13, reducing token usage by ~70%.
 
 </parallel_tasks>
-
-#### Conditional Agents (Run if applicable):
-
-<conditional_agents>
-
-These agents are run ONLY when the PR matches specific criteria. Check the PR files list to determine if they apply:
-
-**If PR contains database migrations (db/migrate/*.rb files) or data backfills:**
-
-14. Task data-migration-expert(PR content) - Validates ID mappings match production, checks for swapped values, verifies rollback safety
-15. Task deployment-verification-agent(PR content) - Creates Go/No-Go deployment checklist with SQL verification queries
-
-**When to run migration agents:**
-- PR includes files matching `db/migrate/*.rb`
-- PR modifies columns that store IDs, enums, or mappings
-- PR includes data backfill scripts or rake tasks
-- PR changes how data is read/written (e.g., changing from FK to string column)
-- PR title/body mentions: migration, backfill, data transformation, ID mapping
-
-**What these agents check:**
-- `data-migration-expert`: Verifies hard-coded mappings match production reality (prevents swapped IDs), checks for orphaned associations, validates dual-write patterns
-- `deployment-verification-agent`: Produces executable pre/post-deploy checklists with SQL queries, rollback procedures, and monitoring plans
-
-</conditional_agents>
 
 ### 4. Ultra-Thinking Deep Dive Phases
 
