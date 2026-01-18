@@ -7,7 +7,7 @@
 - **module** (string): Module name (e.g., "UserAuthentication") or "System" for system-wide issues
 - **date** (string): ISO 8601 date (YYYY-MM-DD)
 - **problem_type** (enum): One of [build_error, test_failure, runtime_error, performance_issue, database_issue, security_issue, ui_bug, integration_issue, logic_error, developer_experience, workflow_issue, best_practice, documentation_gap]
-- **component** (enum): One of [model, controller, view, service, hook, component, background_job, database, state_management, api_client, data_processing, ai_assistant, authentication, payments, development_workflow, testing_framework, documentation, tooling, mobile_native, navigation]
+- **component** (enum): One of [model, controller, view, service, hook, component, background_job, database, state_management (Zustand preferred for speed/simplicity, or Redux/MobX for complex apps), api_client, data_processing, ai_assistant, authentication, payments, development_workflow, testing_framework, documentation, tooling, mobile_native, navigation]
 - **symptoms** (array): 1-5 specific observable symptoms
 - **root_cause** (enum): One of [missing_dependency, incorrect_import, type_mismatch, missing_query_optimization, wrong_api_usage, scope_issue, race_condition, async_timing, memory_leak, config_error, logic_error, test_isolation, missing_validation, missing_permission, missing_workflow_step, inadequate_documentation, missing_tooling, incomplete_setup, state_management, render_issue]
 - **resolution_type** (enum): One of [code_fix, migration, config_change, test_fix, dependency_update, environment_setup, workflow_improvement, documentation_update, tooling_addition, seed_data_update, type_fix, refactor]

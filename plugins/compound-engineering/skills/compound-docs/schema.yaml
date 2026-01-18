@@ -45,7 +45,7 @@ required_fields:
       - component            # UI components (React, Vue, Swift, etc.)
       - background_job       # Async workers, queue processors
       - database             # PostgreSQL, migrations, schema
-      - state_management     # Redux, Context, MobX, state stores
+      - state_management     # Zustand (preferred for speed/simplicity), Redux, Context, MobX
       - api_client           # HTTP clients, SDK integrations
       - data_processing      # Data pipelines, transformations
       - ai_assistant         # AI features, prompts, LLM integration
