@@ -513,7 +513,32 @@ The subagent will:
 
 **Standalone:** `/xcode-test [scheme]`
 
-### Important: P1 Findings Block Merge
+### Important: P1 Findings Block PR Creation
 
-Any **🔴 P1 (CRITICAL)** findings must be addressed before merging the PR. Present these prominently and ensure they're resolved before accepting the PR.
+Any **🔴 P1 (CRITICAL)** findings must be addressed before creating the PR.
+
+### 8. Create Pull Request (After Findings Resolved)
+
+Once all P1 findings are resolved and P2/P3 triaged:
+
+```bash
+gh pr create --title "feat: [Description]" --body "$(cat <<'EOF'
+## Summary
+- What was built
+- Key decisions made
+
+## Review Completed
+- [X] Security review passed
+- [X] Architecture review passed
+- [X] P1 findings resolved
+- [X] Tests pass
+
+## Screenshots
+| Before | After |
+|--------|-------|
+| ![before](URL) | ![after](URL) |
+EOF
+)"
 ```
+
+The PR is now ready for human review and merge.

@@ -199,37 +199,17 @@ This command takes a work document (plan, specification, or todo file) and execu
 
    **IMPORTANT**: Always include uploaded image URLs in PR description. This provides visual context for reviewers and documents the change.
 
-3. **Create Pull Request**
+3. **Push Changes for Review**
 
    ```bash
    git push -u origin feature-branch-name
-
-   gh pr create --title "Feature: [Description]" --body "$(cat <<'EOF'
-   ## Summary
-   - What was built
-   - Why it was needed
-   - Key decisions made
-
-   ## Testing
-   - Tests added/modified
-   - Manual testing performed
-
-   ## Before / After Screenshots
-   | Before | After |
-   |--------|-------|
-   | ![before](URL) | ![after](URL) |
-
-   ## Figma Design
-   [Link if applicable]
-   EOF
-   )"
    ```
 
-4. **Notify User**
-   - Summarize what was completed
-   - Link to PR
-   - Note any follow-up work needed
-   - Suggest next steps if applicable
+4. **Next Step: Review**
+
+   Run `/workflows:review` to analyze your changes before creating the PR.
+   The review will catch issues early and create todos for any findings.
+   Once review passes and findings are resolved, create the PR.
 
 ---
 
@@ -266,31 +246,13 @@ This command takes a work document (plan, specification, or todo file) and execu
 - Don't leave features 80% done
 - A finished feature that ships beats a perfect feature that doesn't
 
-## Quality Checklist
+## Before Moving to Review
 
-Before creating PR, verify:
-
-- [ ] All clarifying questions asked and answered
 - [ ] All TodoWrite tasks marked completed
 - [ ] Tests pass (run project's test command)
-- [ ] Linting passes (use linting-agent)
-- [ ] Code follows existing patterns
-- [ ] Figma designs match implementation (if applicable)
-- [ ] Before/after screenshots captured and uploaded (for UI changes)
-- [ ] Commit messages follow conventional format
-- [ ] PR description includes summary, testing notes, and screenshots
+- [ ] Changes pushed to feature branch
 
-## When to Use Reviewer Agents
-
-**Don't use by default.** Use reviewer agents only when:
-
-- Large refactor affecting many files (10+)
-- Security-sensitive changes (authentication, permissions, data access)
-- Performance-critical code paths
-- Complex algorithms or business logic
-- User explicitly requests thorough review
-
-For most features: tests + linting + following patterns is sufficient.
+Then run `/workflows:review` - it handles quality checks, security, architecture, and creates todos for any issues.
 
 ## Common Pitfalls to Avoid
 
