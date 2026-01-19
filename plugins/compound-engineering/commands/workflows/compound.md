@@ -193,3 +193,37 @@ Based on problem type, these agents can enhance documentation:
 
 - `/research [topic]` - Deep investigation (searches docs/solutions/ for patterns)
 - `/workflows:plan` - Planning workflow (references documented solutions)
+
+## Optional: Update Skills from Session
+
+After documenting the solution, offer to run autoskill to capture any patterns worth adding to skills:
+
+```markdown
+**Solution documented.** Want to check if any skills should be updated from this session?
+1. Yes - run autoskill
+2. No - done
+```
+
+If user selects "Yes", spawn a subagent with the autoskill:
+
+```bash
+Task general-purpose: "Use the autoskill skill.
+
+1. Read the skill: cat plugins/compound-engineering/skills/autoskill/SKILL.md
+2. Scan this conversation for:
+   - Corrections the user made
+   - Repeated patterns or preferences
+   - Explicit approvals
+3. Map signals to existing skills
+4. Propose updates with evidence
+5. Wait for user approval before editing
+
+Focus on project-specific conventions, not general best practices."
+```
+
+The autoskill will:
+- Detect corrections and preferences from the session
+- Map them to relevant skills
+- Propose minimal, additive changes
+- Wait for explicit approval before editing
+
