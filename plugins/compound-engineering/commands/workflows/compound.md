@@ -29,7 +29,9 @@ This command launches multiple specialized subagents IN PARALLEL to maximize eff
    - Extracts conversation history
    - Identifies problem type, component, symptoms
    - Validates against documentation schema
-   - Returns: YAML frontmatter skeleton
+   - Determines optimal `docs/solutions/` category
+   - Suggests filename based on slug
+   - Returns: YAML frontmatter skeleton + final path
 
 ### 2. **Solution Extractor** (Parallel)
    - Analyzes all investigation steps
@@ -37,30 +39,12 @@ This command launches multiple specialized subagents IN PARALLEL to maximize eff
    - Extracts working solution with code examples
    - Returns: Solution content block
 
-### 3. **Related Docs Finder** (Parallel)
-   - Searches `docs/solutions/` for related documentation
-   - Identifies cross-references and links
-   - Finds related GitHub issues
-   - Returns: Links and relationships
-
-### 4. **Prevention Strategist** (Parallel)
-   - Develops prevention strategies
-   - Creates best practices guidance
-   - Generates test cases if applicable
-   - Returns: Prevention/testing content
-
-### 5. **Category Classifier** (Parallel)
-   - Determines optimal `docs/solutions/` category
-   - Validates category against schema
-   - Suggests filename based on slug
-   - Returns: Final path and filename
-
-### 6. **Documentation Writer** (Parallel)
+### 3. **Documentation Writer** (Parallel)
    - Assembles complete markdown file
    - Validates YAML frontmatter
    - Formats content for readability
 
-### 7. **Optional: Specialized Agent Invocation** (Post-Documentation)
+### 4. **Optional: Specialized Agent Invocation** (Post-Documentation)
    Based on problem type detected, automatically invoke applicable agents:
    - **performance_issue** → `performance-oracle`
    - **security_issue** → `security-sentinel`
@@ -114,11 +98,8 @@ This command launches multiple specialized subagents IN PARALLEL to maximize eff
 ✓ Parallel documentation generation complete
 
 Primary Subagent Results:
-  ✓ Context Analyzer: Identified performance_issue in brief_system
+  ✓ Context Analyzer: Identified performance_issue → docs/solutions/performance-issues/
   ✓ Solution Extractor: Extracted 3 code fixes
-  ✓ Related Docs Finder: Found 2 related issues
-  ✓ Prevention Strategist: Generated test cases
-  ✓ Category Classifier: docs/solutions/performance-issues/
   ✓ Documentation Writer: Created complete markdown
 
 Specialized Agent Reviews (Auto-Triggered):
@@ -129,14 +110,12 @@ File created:
 - docs/solutions/performance-issues/n-plus-one-brief-generation.md
 
 This documentation will be searchable for future reference when similar
-issues occur in the Email Processing or Brief System modules.
+issues occur.
 
 What's next?
 1. Continue workflow (recommended)
-2. Link related documentation
-3. Update other references
-4. View documentation
-5. Other
+2. View documentation
+3. Other
 ```
 
 ## The Compounding Philosophy
@@ -193,3 +172,34 @@ Based on problem type, these agents can enhance documentation:
 
 - `/research [topic]` - Deep investigation (searches docs/solutions/ for patterns)
 - `/workflows:plan` - Planning workflow (references documented solutions)
+
+## Auto-Spawn: Skill Learning
+
+After documenting the solution, automatically spawn an autoskill subagent **in parallel** to analyze the session for skill update opportunities:
+
+```bash
+Task general-purpose (run_in_background: true): "Use the autoskill skill.
+
+1. Read the skill: cat plugins/compound-engineering/skills/autoskill/SKILL.md
+2. Scan this conversation for skill improvement opportunities:
+   - **Generalizable rules**: User said 'we should always...', 'from now on...', 'respect this pattern'
+   - **Corrections**: User said 'use X instead of Y', 'don't do X'
+   - **Repeated patterns**: Same feedback given multiple times
+3. Apply quality filter: repeated, generalizable, actionable, new
+4. If NO qualified signals → return silently (no output)
+5. If qualified signals found → propose updates with evidence and await approval
+
+Focus on explicit generalizable statements from the user.
+Skip one-off corrections and general best practices."
+```
+
+**When to activate:**
+- User states generalizable rules: "we should always...", "from now on...", "never do X"
+- Repeated corrections across the session
+- Explicit requests to remember a pattern
+
+The autoskill:
+- Runs in parallel with documentation completion
+- Only surfaces if it finds qualified signals
+- Requires explicit approval before editing any files
+
