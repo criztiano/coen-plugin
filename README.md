@@ -94,6 +94,13 @@ This fork includes the following customizations:
 - **Doer → Reviewer pairing** - Doer agents auto-spawn reviewers when they finish:
   - `design-iterator` → `design-implementation-reviewer`
   - `figma-design-sync` → `design-implementation-reviewer`
+  - `pr-comment-resolver` → `code-simplicity-reviewer`
+- **`/workflows:work` auto-reviewers** - Work command documents how to trigger reviewers based on file types:
+  - TypeScript/React → `senior-typescript-reviewer`
+  - Python → `senior-python-reviewer`
+  - CSS/styles → `design-implementation-reviewer`
+  - State management → `frontend-races-reviewer`
+  - Database migrations → `data-integrity-guardian`
 - **`/workflows:finalize`** - New lighter review command for after incremental reviews:
   - Only runs cross-cutting agents (security, architecture)
   - Browser testing (mandatory for UI changes)

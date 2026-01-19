@@ -82,6 +82,15 @@ Task design-implementation-reviewer("Review the design implementation...")
 **Used by agents:**
 - `design-iterator` → triggers `design-implementation-reviewer`
 - `figma-design-sync` → triggers `design-implementation-reviewer`
+- `pr-comment-resolver` → triggers `code-simplicity-reviewer`
+
+**Manual triggering in /workflows:work:**
+The work command also documents how to manually trigger reviewers based on file types:
+- TypeScript/React files → `senior-typescript-reviewer`
+- Python files → `senior-python-reviewer`
+- CSS/style files → `design-implementation-reviewer`
+- State management files → `frontend-races-reviewer`
+- Database migrations → `data-integrity-guardian`
 
 ### `run-tests-after-review.sh`
 **Type:** SubagentStop hook (project-level)

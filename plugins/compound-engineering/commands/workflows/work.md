@@ -109,6 +109,30 @@ This command takes a work document (plan, specification, or todo file) and execu
    - Create new tasks if scope expands
    - Keep user informed of major milestones
 
+6. **Auto-Trigger Reviewers** (Incremental Review)
+
+   After completing a significant chunk of work, trigger the appropriate reviewer based on files changed:
+
+   ```bash
+   # Check what files were modified
+   git diff --name-only HEAD~1..HEAD
+   ```
+
+   | Files Changed | Auto-Spawn Reviewer |
+   |---------------|---------------------|
+   | `*.tsx`, `*.jsx`, `components/*` | `senior-typescript-reviewer` |
+   | `*.py` | `senior-python-reviewer` |
+   | `*.css`, `*.scss`, `styles/*` | `design-implementation-reviewer` |
+   | `store/*`, `context/*`, `hooks/*` | `frontend-races-reviewer` |
+   | `migrations/*`, `db/*` | `data-integrity-guardian` |
+
+   **How to trigger:**
+   ```
+   Task senior-typescript-reviewer("Review the TypeScript changes just made. Check type safety, patterns, and quality.")
+   ```
+
+   This provides immediate feedback during work. Then use `/workflows:finalize` at the end for cross-cutting checks + PR.
+
 ### Phase 3: Quality Check
 
 1. **Run Core Quality Checks**
@@ -199,10 +223,19 @@ This command takes a work document (plan, specification, or todo file) and execu
 
    **IMPORTANT**: Save screenshot URLs for the PR description later.
 
-3. **Next Step: Review**
+3. **Next Step: Review or Finalize**
 
-   Run `/workflows:review` to analyze your changes.
-   Review will automatically resolve findings, then push and create the PR.
+   **If you used auto-reviewers during work (incremental review):**
+   ```
+   /workflows:finalize
+   ```
+   Finalize runs only cross-cutting checks (security, architecture), browser tests, and creates the PR.
+
+   **If you didn't use auto-reviewers:**
+   ```
+   /workflows:review
+   ```
+   Review runs full multi-agent analysis, resolves findings, then creates the PR.
 
 ---
 
