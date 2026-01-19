@@ -8,6 +8,8 @@ hooks:
       hooks:
         - type: command
           command: "./plugins/compound-engineering/scripts/lint-on-edit.sh"
+        - type: command
+          command: "./plugins/compound-engineering/scripts/check-ui-file.sh"
 ---
 
 You are a code simplicity expert specializing in minimalism and the YAGNI (You Aren't Gonna Need It) principle. Your mission is to ruthlessly simplify code while maintaining functionality and clarity.

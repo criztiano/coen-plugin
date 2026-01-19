@@ -20,22 +20,30 @@ Supports:
 - `senior-python-reviewer`
 - `code-simplicity-reviewer`
 
-### `validate-yaml-frontmatter.sh`
-**Type:** PreToolUse hook
-**Trigger:** Before Write operations to `docs/solutions/`
-**Purpose:** Validates YAML frontmatter against schema before writing
+### `check-ui-file.sh`
+**Type:** PostToolUse hook
+**Trigger:** After Edit or Write operations
+**Purpose:** Detects if edited file is UI-related and reminds that browser testing is mandatory
 
-Validates:
-- Required fields: module, date, problem_type, component, symptoms, root_cause, resolution_type, severity
-- Enum values for problem_type, component, severity
-- Date format (YYYY-MM-DD)
+Detects UI patterns:
+- `*.tsx`, `*.jsx`, `*.css`, `*.scss`
+- `components/`, `pages/`, `app/`, `views/`
+- `layouts/`, `templates/`, `styles/`
+- `store/`, `context/`, `hooks/use*`
+- Form/input/validation related files
+- `tailwind.config.*`, `theme.*`
 
-**Exit codes:**
-- `0` = Allow (validation passed or not a docs/solutions file)
-- `2` = Block (validation failed, error message passed to Claude)
+**Output when UI file detected:**
+```
+⚠️  UI FILE MODIFIED: src/components/Button.tsx
+   → Browser testing is MANDATORY before PR creation
+   → Run /test-browser after review completes
+```
 
-**Used by skills:**
-- `compound-docs`
+**Used by agents:**
+- `senior-typescript-reviewer`
+- `senior-python-reviewer`
+- `code-simplicity-reviewer`
 
 ### `run-tests-after-review.sh`
 **Type:** SubagentStop hook (project-level)
@@ -48,9 +56,23 @@ Detects project type and runs:
 - Rust: `cargo test`
 - Go: `go test ./...`
 
-## Enabling SubagentStop Hook
+## Enabling Hooks
 
-The `run-tests-after-review.sh` script requires a project-level hook in your `settings.json`.
+### Agent-level hooks (already configured)
+
+The review agents already have PostToolUse hooks in their frontmatter:
+```yaml
+hooks:
+  PostToolUse:
+    - matcher: "Edit|Write"
+      hooks:
+        - type: command
+          command: "./plugins/compound-engineering/scripts/lint-on-edit.sh"
+        - type: command
+          command: "./plugins/compound-engineering/scripts/check-ui-file.sh"
+```
+
+### Project-level SubagentStop hook
 
 Add this to your project's `.claude/settings.json`:
 
@@ -76,15 +98,11 @@ Or add it globally in `~/.claude/settings.json` to apply to all projects.
 
 ## How Hooks Work
 
-1. **PreToolUse hooks** run before a tool executes
-   - Exit 0 = allow the operation
-   - Exit 2 = block the operation (stderr message shown to Claude)
-
-2. **PostToolUse hooks** run after a tool completes
+1. **PostToolUse hooks** run after a tool completes
    - Always advisory (exit 0)
    - Used for linting, formatting, notifications
 
-3. **SubagentStop hooks** run when a subagent finishes
+2. **SubagentStop hooks** run when a subagent finishes
    - Project-level only (in settings.json)
    - Used for cleanup, final validation, test runs
 

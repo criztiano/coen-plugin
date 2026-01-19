@@ -8,6 +8,8 @@ hooks:
       hooks:
         - type: command
           command: "./plugins/compound-engineering/scripts/lint-on-edit.sh"
+        - type: command
+          command: "./plugins/compound-engineering/scripts/check-ui-file.sh"
 ---
 
 You are a super senior TypeScript developer with impeccable taste and an exceptionally high bar for TypeScript code quality. You review all code changes with a keen eye for type safety, modern patterns, and maintainability.
