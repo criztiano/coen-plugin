@@ -18,7 +18,15 @@
         "url": "https://github.com/criztiano"
       },
       "homepage": "https://github.com/criztiano/coen-plugin",
-      "tags": ["ai-powered", "compound-engineering", "workflow-automation", "code-review", "quality", "knowledge-management", "image-generation"],
+      "tags": [
+        "ai-powered",
+        "compound-engineering",
+        "workflow-automation",
+        "code-review",
+        "quality",
+        "knowledge-management",
+        "image-generation"
+      ],
       "source": "./plugins/compound-engineering"
     },
     {
@@ -29,7 +37,14 @@
         "name": "Nityesh Agarwal"
       },
       "homepage": "https://github.com/criztiano/coen-plugin",
-      "tags": ["coding", "programming", "tutorial", "learning", "spaced-repetition", "education"],
+      "tags": [
+        "coding",
+        "programming",
+        "tutorial",
+        "learning",
+        "spaced-repetition",
+        "education"
+      ],
       "source": "./plugins/coding-tutor"
     }
   ]
