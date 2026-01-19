@@ -182,23 +182,21 @@ Task general-purpose (run_in_background: true): "Use the autoskill skill.
 
 1. Read the skill: cat plugins/compound-engineering/skills/autoskill/SKILL.md
 2. Scan this conversation for skill improvement opportunities:
-   - **Skill usage gaps**: A skill was invoked but didn't produce ideal results
-     - User had to make corrections or adjustments
-     - Better skill documentation could have prevented the issue
+   - **Generalizable rules**: User said 'we should always...', 'from now on...', 'respect this pattern'
    - **Corrections**: User said 'use X instead of Y', 'don't do X'
    - **Repeated patterns**: Same feedback given multiple times
 3. Apply quality filter: repeated, generalizable, actionable, new
 4. If NO qualified signals → return silently (no output)
 5. If qualified signals found → propose updates with evidence and await approval
 
-Focus on cases where skill documentation improvements would prevent future adjustments.
-Skip general best practices already covered."
+Focus on explicit generalizable statements from the user.
+Skip one-off corrections and general best practices."
 ```
 
 **When to activate:**
-- A skill was used but needed manual corrections afterward
-- User provided feedback that should be baked into a skill
-- Patterns emerged that better skill structure could capture
+- User states generalizable rules: "we should always...", "from now on...", "never do X"
+- Repeated corrections across the session
+- Explicit requests to remember a pattern
 
 The autoskill:
 - Runs in parallel with documentation completion

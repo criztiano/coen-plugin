@@ -12,7 +12,7 @@ A meta-learning mechanism that analyzes coding sessions to extract durable prefe
 This skill activates when:
 - User explicitly requests: "learn from this session", "update skills", "remember this pattern", "autoskill"
 - After `/workflows:compound` documents a solution
-- **A skill was used but didn't produce ideal results** - user had to make corrections or adjustments that better skill documentation could have prevented
+- **User states generalizable rules** like "we should always...", "from now on...", "respect this pattern"
 
 **Does NOT activate for:** One-off corrections, declined modifications, or general best practices already well-known.
 
@@ -20,12 +20,15 @@ This skill activates when:
 
 Scan the conversation for four signal types:
 
-### 1. Skill Usage Gaps (Highest Value)
-A skill was invoked but needed adjustments:
-- Output required manual corrections
-- User refined or adjusted skill-generated content
-- Better skill documentation would have produced correct output first try
-- Example: "Actually, that should have been X format, not Y"
+### 1. Generalizable Rules (Highest Value)
+User states a rule that should always apply:
+- "We should always do X" / "Always use X"
+- "Respect this pattern" / "Follow this convention"
+- "From now on, do X instead of Y"
+- "This should be the default approach"
+- "Remember to always..." / "Never do X"
+
+These explicit generalizations indicate the user wants this baked into future behavior.
 
 ### 2. Corrections (High Value)
 Direct contradictions like:
@@ -96,14 +99,14 @@ For each qualified signal, identify which skill it relates to:
 
 | Signal Type | Likely Skill |
 |-------------|--------------|
-| Skill usage gap | The skill that was invoked and needed adjustment |
+| Generalizable rule | The skill most relevant to the rule's domain |
 | Code style preference | `frontend-design`, language-specific skills |
 | Architecture pattern | `agent-native-architecture` |
 | Documentation format | `compound-docs` |
 | Component structure | `frontend-design` |
 | Testing approach | testing-related skills |
 
-**For skill usage gaps:** Always target the specific skill that was used. The fix should prevent the same adjustment from being needed in future sessions.
+**For generalizable rules:** Map the rule to the skill that governs that domain. The update should ensure the rule is followed in all future sessions.
 
 ### Step 4: Propose Changes
 
