@@ -13,16 +13,25 @@ A Claude Code plugin that makes each unit of engineering work easier than the la
 
 ## Workflow
 
+**Standard workflow (full review):**
 ```
 Plan → Work → Review → Compound → Repeat
+```
+
+**Optimized workflow (incremental reviews):**
+```
+Plan → Work (with auto-reviewers) → Finalize → Compound → Repeat
 ```
 
 | Command | Purpose |
 |---------|---------|
 | `/workflows:plan` | Turn feature ideas into detailed implementation plans |
 | `/workflows:work` | Execute plans with task tracking (commits locally) |
-| `/workflows:review` | Multi-agent code review with auto-resolve, then PR creation |
+| `/workflows:review` | Full multi-agent code review with auto-resolve, then PR |
+| `/workflows:finalize` | Light review (security + architecture only) after incremental reviews |
 | `/workflows:compound` | Document learnings to make future work easier |
+
+**Auto-reviewer hooks:** Doer agents (like `design-iterator`) automatically spawn their reviewers when they finish. This enables incremental feedback during work, then a lighter finalize step.
 
 Each cycle compounds: plans inform future plans, reviews catch more issues, patterns get documented.
 
@@ -79,6 +88,21 @@ This fork includes the following customizations:
   - Solution Extractor
   - Documentation Writer
 - **Removed**: Prevention Strategist, Related Docs Finder (compound-docs skill handles these)
+
+### Auto-Reviewer Hooks & Incremental Review
+
+- **Doer → Reviewer pairing** - Doer agents auto-spawn reviewers when they finish:
+  - `design-iterator` → `design-implementation-reviewer`
+  - `figma-design-sync` → `design-implementation-reviewer`
+- **`/workflows:finalize`** - New lighter review command for after incremental reviews:
+  - Only runs cross-cutting agents (security, architecture)
+  - Browser testing (mandatory for UI changes)
+  - PR creation
+- **Hook scripts** in `scripts/`:
+  - `lint-on-edit.sh` - Auto-lint after edits
+  - `check-ui-file.sh` - Detect UI changes, remind about browser testing
+  - `trigger-reviewer.sh` - Auto-spawn reviewer after doer completes
+  - `run-tests-after-review.sh` - Auto-run tests after review
 
 ## Learn More
 

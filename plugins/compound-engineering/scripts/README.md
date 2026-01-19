@@ -45,6 +45,44 @@ Detects UI patterns:
 - `senior-python-reviewer`
 - `code-simplicity-reviewer`
 
+### `trigger-reviewer.sh`
+**Type:** Stop hook (agent-level)
+**Trigger:** When a "doer" agent completes
+**Purpose:** Auto-spawns the corresponding reviewer agent
+
+Usage:
+```bash
+./trigger-reviewer.sh <reviewer-agent-name> [context]
+```
+
+Supported reviewers:
+- `design-implementation-reviewer` - For design work
+- `senior-typescript-reviewer` - For TypeScript work
+- `senior-python-reviewer` - For Python work
+- `frontend-races-reviewer` - For async/race condition review
+- `security-sentinel` - For security review
+- `data-integrity-guardian` - For data/migration work
+- `performance-oracle` - For performance review
+
+**Output:** Instructions for Claude to spawn the reviewer:
+```
+═══════════════════════════════════════════════════════════════
+✓ WORK COMPLETE - AUTO-SPAWNING REVIEWER
+═══════════════════════════════════════════════════════════════
+
+Reviewer: design-implementation-reviewer
+Context: the design iterations just completed
+
+→ INSTRUCTION: Spawn the reviewer agent now:
+
+Task design-implementation-reviewer("Review the design implementation...")
+═══════════════════════════════════════════════════════════════
+```
+
+**Used by agents:**
+- `design-iterator` → triggers `design-implementation-reviewer`
+- `figma-design-sync` → triggers `design-implementation-reviewer`
+
 ### `run-tests-after-review.sh`
 **Type:** SubagentStop hook (project-level)
 **Trigger:** After review agents complete
