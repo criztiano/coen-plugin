@@ -142,6 +142,60 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 - `GEMINI_API_KEY` environment variable
 - Python packages: `google-genai`, `pillow`
 
+## Hooks
+
+The plugin provides validation hooks that automatically check your work. Add these to your project's `.claude/settings.json`:
+
+### Plan Validation Hook
+
+Automatically validates plans written by `/workflows:plan` against a quality checklist.
+
+**What it checks:**
+| Check | Type | Description |
+|-------|------|-------------|
+| File:line references | Blocking | Research must identify specific code locations |
+| Acceptance Criteria | Blocking | Plan must define what "done" looks like |
+| Code blocks | Warning | Implementation examples recommended |
+| References section | Warning | Links to docs/PRs that informed the plan |
+| Technical Approach | Warning | How the change will be implemented |
+| Vague language | Warning | Flags "somewhere in", "probably", etc. |
+
+**Configuration:**
+
+Add to your project's `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "command": "~/.claude/plugins/cache/*/compound-engineering/*/scripts/validate-plan.sh"
+      }
+    ]
+  }
+}
+```
+
+The hook only triggers when writing to `plans/*.md` files.
+
+### UI File Check Hook
+
+Flags when UI-related files are modified, reminding to run browser tests.
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "command": "~/.claude/plugins/cache/*/compound-engineering/*/scripts/check-ui-file.sh"
+      }
+    ]
+  }
+}
+```
+
 ## MCP Servers
 
 | Server | Description |

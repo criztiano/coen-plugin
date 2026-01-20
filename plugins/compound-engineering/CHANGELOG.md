@@ -5,6 +5,24 @@ All notable changes to the compound-engineering plugin will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.27.0] - 2026-01-20
+
+### Added
+
+- **`validate-plan.sh` hook** - Automated plan validation inspired by Harness Engineering principles
+  - Triggers on Write to `plans/*.md` files
+  - **Blocking checks:** File:line references (research grounding), Acceptance Criteria section
+  - **Warning checks:** Code blocks, References section, Technical Approach, vague language detection
+  - Returns actionable feedback when validation fails
+  - Philosophy: "Bad research = whole thing is hosed" - plans must be grounded in verified facts
+  - See README Hooks section for configuration
+
+### Philosophy
+
+This update implements a key insight from Harness Engineering: research validation should happen *before* planning proceeds. The hook ensures plans contain specific file:line references (proving research found actual code locations) and defined acceptance criteria (proving "done" is well-understood). Vague language like "somewhere in" or "probably" triggers warnings, encouraging replacement with verified facts.
+
+---
+
 ## [2.26.4] - 2026-01-15
 
 ### Changed
