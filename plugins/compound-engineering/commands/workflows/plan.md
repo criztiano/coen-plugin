@@ -124,8 +124,8 @@ Think like a product manager - what would make this issue clear and actionable? 
 
 - [ ] Draft clear, searchable issue title using conventional format (e.g., `feat: Add user authentication`, `fix: Cart total calculation`)
 - [ ] Determine issue type: enhancement, bug, refactor
-- [ ] Convert title to kebab-case filename: strip prefix colon, lowercase, hyphens for spaces
-  - Example: `feat: Add User Authentication` → `feat-add-user-authentication.md`
+- [ ] Convert title to filename: add today's date prefix, strip prefix colon, kebab-case, add `-plan` suffix
+  - Example: `feat: Add User Authentication` → `2026-01-21-feat-add-user-authentication-plan.md`
   - Keep it descriptive (3-5 words after prefix) so plans are findable by context
 
 **Stakeholder Analysis:**
@@ -169,6 +169,14 @@ Select how comprehensive you want the issue to be, simpler is mostly better.
 **Structure:**
 
 ````markdown
+---
+title: [Issue Title]
+type: [feat|fix|refactor]
+date: YYYY-MM-DD
+---
+
+# [Issue Title]
+
 [Brief problem/feature description]
 
 ## Acceptance Criteria
@@ -215,6 +223,14 @@ class Example {
 **Structure:**
 
 ```markdown
+---
+title: [Issue Title]
+type: [feat|fix|refactor]
+date: YYYY-MM-DD
+---
+
+# [Issue Title]
+
 ## Overview
 
 [Comprehensive description]
@@ -271,6 +287,14 @@ class Example {
 **Structure:**
 
 ```markdown
+---
+title: [Issue Title]
+type: [feat|fix|refactor]
+date: YYYY-MM-DD
+---
+
+# [Issue Title]
+
 ## Overview
 
 [Executive summary]
@@ -444,25 +468,26 @@ function processUser(user: User): void {
 
 ## Output Format
 
-**Filename:** Use the kebab-case filename from Step 2 Title & Categorization.
+**Filename:** Use the date and kebab-case filename from Step 2 Title & Categorization.
 
 ```
-plans/<type>-<descriptive-name>.md
+docs/plans/YYYY-MM-DD-<type>-<descriptive-name>-plan.md
 ```
 
 Examples:
-- ✅ `plans/feat-user-authentication-flow.md`
-- ✅ `plans/fix-checkout-race-condition.md`
-- ✅ `plans/refactor-api-client-extraction.md`
-- ❌ `plans/plan-1.md` (not descriptive)
-- ❌ `plans/new-feature.md` (too vague)
-- ❌ `plans/feat: user auth.md` (invalid characters)
+- ✅ `docs/plans/2026-01-15-feat-user-authentication-flow-plan.md`
+- ✅ `docs/plans/2026-02-03-fix-checkout-race-condition-plan.md`
+- ✅ `docs/plans/2026-03-10-refactor-api-client-extraction-plan.md`
+- ❌ `docs/plans/2026-01-15-feat-thing-plan.md` (not descriptive - what "thing"?)
+- ❌ `docs/plans/2026-01-15-feat-new-feature-plan.md` (too vague - what feature?)
+- ❌ `docs/plans/2026-01-15-feat: user auth-plan.md` (invalid characters - colon and space)
+- ❌ `docs/plans/feat-user-auth-plan.md` (missing date prefix)
 
 ## Post-Generation Options
 
 After writing the plan file, use the **AskUserQuestion tool** to present these options:
 
-**Question:** "Plan ready at `plans/<issue_title>.md`. What would you like to do next?"
+**Question:** "Plan ready at `docs/plans/YYYY-MM-DD-<type>-<name>-plan.md`. What would you like to do next?"
 
 **Options:**
 1. **Open plan in editor** - Open the plan file for review
@@ -474,11 +499,11 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 7. **Simplify** - Reduce detail level
 
 Based on selection:
-- **Open plan in editor** → Run `open plans/<issue_title>.md` to open the file in the user's default editor
+- **Open plan in editor** → Run `open docs/plans/<plan_filename>.md` to open the file in the user's default editor
 - **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
 - **`/plan_review`** → Call the /plan_review command with the plan file path
 - **`/workflows:work`** → Call the /workflows:work command with the plan file path
-- **`/workflows:work` on remote** → Run `/workflows:work plans/<issue_title>.md &` to start work in background for Claude Code web
+- **`/workflows:work` on remote** → Run `/workflows:work docs/plans/<plan_filename>.md &` to start work in background for Claude Code web
 - **Create Issue** → See "Issue Creation" section below
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
@@ -496,16 +521,17 @@ When user selects "Create Issue", detect their project tracker from CLAUDE.md:
    - Or look for mentions of "GitHub Issues" or "Linear" in their workflow section
 
 2. **If GitHub:**
+
+   Use the title and type from Step 2 (already in context - no need to re-read the file):
+
    ```bash
-   # Extract title from plan filename (kebab-case to Title Case)
-   # Read plan content for body
-   gh issue create --title "feat: [Plan Title]" --body-file plans/<issue_title>.md
+   gh issue create --title "<type>: <title>" --body-file <plan_path>
    ```
 
 3. **If Linear:**
+
    ```bash
-   # Use linear CLI if available, or provide instructions
-   # linear issue create --title "[Plan Title]" --description "$(cat plans/<issue_title>.md)"
+   linear issue create --title "<title>" --description "$(cat <plan_path>)"
    ```
 
 4. **If no tracker configured:**

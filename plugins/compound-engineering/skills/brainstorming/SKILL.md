@@ -134,7 +134,7 @@ topic: <kebab-case-topic>
 → `/workflows:plan` for implementation details
 ```
 
-**Output Location:** `docs/brainstorms/YYYY-MM-DD-<topic>.md`
+**Output Location:** `docs/brainstorms/YYYY-MM-DD-<topic>-brainstorm.md`
 
 ### Phase 4: Handoff
 
