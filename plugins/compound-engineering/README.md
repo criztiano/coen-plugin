@@ -7,7 +7,7 @@ AI-powered development tools that get smarter with every use. Make each unit of 
 | Component | Count |
 |-----------|-------|
 | Agents | 29 |
-| Commands | 24 |
+| Commands | 25 |
 | Skills | 16 |
 | MCP Servers | 1 |
 
@@ -80,6 +80,8 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 
 | Command | Description |
 |---------|-------------|
+| `/lfg` | Full autonomous engineering workflow |
+| `/slfg` | Full autonomous workflow with swarm mode for parallel execution |
 | `/deepen-plan` | Enhance plans with parallel research agents for each section |
 | `/changelog` | Create engaging changelogs for recent merges |
 | `/create-agent-skill` | Create or edit Claude Code skills |
@@ -116,8 +118,16 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 
 | Skill | Description |
 |-------|-------------|
+| `brainstorming` | Guided ideation for exploring requirements and approaches |
+| `every-style-editor` | Review copy for Every's style guide compliance |
 | `file-todos` | File-based todo tracking system |
 | `git-worktree` | Manage Git worktrees for parallel development |
+
+### Multi-Agent Orchestration
+
+| Skill | Description |
+|-------|-------------|
+| `orchestrating-swarms` | Comprehensive guide to multi-agent swarm orchestration |
 
 ### File Transfer
 
