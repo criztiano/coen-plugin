@@ -5,6 +5,101 @@ All notable changes to the compound-engineering plugin will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.30.0] - 2026-02-05
+
+### Added
+
+- **`orchestrating-swarms` skill** - Comprehensive guide to multi-agent orchestration
+  - Covers primitives: Agent, Team, Teammate, Leader, Task, Inbox, Message, Backend
+  - Documents two spawning methods: subagents vs teammates
+  - Explains all 13 TeammateTool operations
+  - Includes orchestration patterns: Parallel Specialists, Pipeline, Self-Organizing Swarm
+  - Details spawn backends: in-process, tmux, iterm2
+  - Provides complete workflow examples
+- **`/slfg` command** - Swarm-enabled variant of `/lfg` that uses swarm mode for parallel execution
+
+### Changed
+
+- **`/workflows:work` command** - Added optional Swarm Mode section for parallel execution with coordinated agents
+
+---
+
+## [2.29.0] - 2026-02-04
+
+### Added
+
+- **`schema-drift-detector` agent** - Detects unrelated schema.rb changes in PRs
+  - Compares schema.rb diff against migrations in the PR
+  - Catches columns, indexes, and tables from other branches
+  - Prevents accidental inclusion of local database state
+  - Provides clear fix instructions (checkout + migrate)
+  - Essential pre-merge check for any PR with database changes
+
+---
+
+## [2.28.0] - 2026-01-21
+
+### Added
+
+- **`/workflows:brainstorm` command** - Guided ideation flow to expand options quickly (#101)
+
+### Changed
+
+- **`/workflows:plan` command** - Smarter research decision logic before deep dives (#100)
+- **Research checks** - Mandatory API deprecation validation in research flows (#102)
+- **Docs** - Call out experimental OpenCode/Codex providers and install defaults
+- **CLI defaults** - `install` pulls from GitHub by default and writes OpenCode/Codex output to global locations
+
+### Merged PRs
+
+- [#102](https://github.com/EveryInc/compound-engineering-plugin/pull/102) feat(research): add mandatory API deprecation validation
+- [#101](https://github.com/EveryInc/compound-engineering-plugin/pull/101) feat: Add /workflows:brainstorm command and skill
+- [#100](https://github.com/EveryInc/compound-engineering-plugin/pull/100) feat(workflows:plan): Add smart research decision logic
+
+### Contributors
+
+Huge thanks to the community contributors who made this release possible! 🙌
+
+- **[@tmchow](https://github.com/tmchow)** - Brainstorm workflow, research decision logic (2 PRs)
+- **[@jaredmorgenstern](https://github.com/jaredmorgenstern)** - API deprecation validation
+
+---
+
+## [2.27.0] - 2026-01-20
+
+### Added
+
+- **`/workflows:plan` command** - Interactive Q&A refinement phase (#88)
+  - After generating initial plan, now offers to refine with targeted questions
+  - Asks up to 5 questions about ambiguous requirements, edge cases, or technical decisions
+  - Incorporates answers to strengthen the plan before finalization
+
+### Changed
+
+- **`/workflows:work` command** - Incremental commits and branch safety (#93)
+  - Now commits after each completed task instead of batching at end
+  - Added branch protection checks before starting work
+  - Better progress tracking with per-task commits
+
+### Fixed
+
+- **`dhh-rails-style` skill** - Fixed broken markdown table formatting (#96)
+- **Documentation** - Updated hardcoded year references from 2025 to 2026 (#86, #91)
+
+### Contributors
+
+Huge thanks to the community contributors who made this release possible! 🙌
+
+- **[@tmchow](https://github.com/tmchow)** - Interactive Q&A for plans, incremental commits, year updates (3 PRs!)
+- **[@ashwin47](https://github.com/ashwin47)** - Markdown table fix
+- **[@rbouschery](https://github.com/rbouschery)** - Documentation year update
+
+### Summary
+
+- 27 agents, 23 commands, 14 skills, 1 MCP server
+
+---
+
 ## [2.26.5] - 2026-01-18
 
 ### Changed

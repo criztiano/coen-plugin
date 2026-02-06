@@ -6,16 +6,16 @@ AI-powered development tools that get smarter with every use. Make each unit of 
 
 | Component | Count |
 |-----------|-------|
-| Agents | 23 |
-| Commands | 22 |
-| Skills | 10 |
+| Agents | 29 |
+| Commands | 25 |
+| Skills | 16 |
 | MCP Servers | 1 |
 
 ## Agents
 
 Agents are organized into categories for easier discovery.
 
-### Review (12)
+### Review (15)
 
 | Agent | Description |
 |-------|-------------|
@@ -25,20 +25,24 @@ Agents are organized into categories for easier discovery.
 | `data-integrity-guardian` | Database migrations and data integrity |
 | `data-migration-expert` | Validate ID mappings match production, check for swapped values |
 | `deployment-verification-agent` | Create Go/No-Go deployment checklists for risky data changes |
-| `senior-python-reviewer` | Python code review with strict conventions |
-| `senior-typescript-reviewer` | TypeScript code review with strict conventions |
+| `dhh-rails-reviewer` | Rails review from DHH's perspective |
+| `julik-frontend-races-reviewer` | Review JavaScript/Stimulus code for race conditions |
+| `kieran-rails-reviewer` | Rails code review with strict conventions |
+| `kieran-python-reviewer` | Python code review with strict conventions |
+| `kieran-typescript-reviewer` | TypeScript code review with strict conventions |
 | `pattern-recognition-specialist` | Analyze code for patterns and anti-patterns |
 | `performance-oracle` | Performance analysis and optimization |
+| `schema-drift-detector` | Detect unrelated schema.rb changes in PRs |
 | `security-sentinel` | Security audits and vulnerability assessments |
-| `frontend-races-reviewer` | Review JavaScript/Stimulus code for race conditions |
 
-### Research (4)
+### Research (5)
 
 | Agent | Description |
 |-------|-------------|
 | `best-practices-researcher` | Gather external best practices and examples |
 | `framework-docs-researcher` | Research framework documentation and best practices |
 | `git-history-analyzer` | Analyze git history and code evolution |
+| `learnings-researcher` | Search institutional learnings for relevant past solutions |
 | `repo-research-analyst` | Research repository structure and conventions |
 
 ### Design (3)
@@ -76,6 +80,8 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 
 | Command | Description |
 |---------|-------------|
+| `/lfg` | Full autonomous engineering workflow |
+| `/slfg` | Full autonomous workflow with swarm mode for parallel execution |
 | `/deepen-plan` | Enhance plans with parallel research agents for each section |
 | `/changelog` | Create engaging changelogs for recent merges |
 | `/create-agent-skill` | Create or edit Claude Code skills |
@@ -112,8 +118,16 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 
 | Skill | Description |
 |-------|-------------|
+| `brainstorming` | Guided ideation for exploring requirements and approaches |
+| `every-style-editor` | Review copy for Every's style guide compliance |
 | `file-todos` | File-based todo tracking system |
 | `git-worktree` | Manage Git worktrees for parallel development |
+
+### Multi-Agent Orchestration
+
+| Skill | Description |
+|-------|-------------|
+| `orchestrating-swarms` | Comprehensive guide to multi-agent swarm orchestration |
 
 ### File Transfer
 
