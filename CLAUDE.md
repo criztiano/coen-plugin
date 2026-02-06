@@ -36,6 +36,49 @@ When working on this repository, follow the compounding engineering process:
 3. **Assess** → Verify changes work as expected
 4. **Codify** → Update this CLAUDE.md with learnings
 
+## Fork Relationship with Upstream
+
+**CRITICAL: This is a fork of `EveryInc/compound-engineering-plugin`. We maintain our own version.**
+
+### Rules for Working with Upstream
+
+1. **NEVER push to upstream** - Do not create PRs against `EveryInc/compound-engineering-plugin`
+2. **NEVER use `gh pr create` without `--repo criztiano/coen-plugin`** - GitHub defaults to upstream
+3. **Pull FROM upstream only** - We cherry-pick useful commits from upstream to our fork
+
+### Cherry-Picking from Upstream
+
+To get new features from the original project:
+
+```bash
+# Add upstream remote (if not already added)
+git remote add upstream https://github.com/EveryInc/compound-engineering-plugin.git
+
+# Fetch upstream changes
+git fetch upstream
+
+# View upstream commits
+git log upstream/main --oneline
+
+# Cherry-pick specific commits
+git cherry-pick <commit-sha>
+
+# Create PR against OUR fork (not upstream!)
+gh pr create --repo criztiano/coen-plugin --base main
+```
+
+### Creating PRs (Important!)
+
+Always explicitly specify our fork when creating PRs:
+
+```bash
+# CORRECT - targets our fork
+gh pr create --repo criztiano/coen-plugin --base main
+
+# WRONG - will target upstream EveryInc repo
+gh pr create --base main
+```
+
 ## Working with This Repository
 
 ### Adding a New Plugin
