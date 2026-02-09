@@ -114,6 +114,7 @@ function convertAgent(agent: ClaudeAgent, options: ClaudeToOpenCodeOptions) {
 function convertCommands(commands: ClaudeCommand[]): Record<string, OpenCodeCommandConfig> {
   const result: Record<string, OpenCodeCommandConfig> = {}
   for (const command of commands) {
+    if (command.disableModelInvocation) continue
     const entry: OpenCodeCommandConfig = {
       description: command.description,
       template: command.body,
