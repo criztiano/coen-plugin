@@ -21,35 +21,83 @@ Captures problem solutions while context is fresh, creating structured documenta
 /workflows:compound [brief context]    # Provide additional context hint
 ```
 
-## Execution Strategy: Parallel Subagents
+## Execution Strategy: Two-Phase Orchestration
 
-This command launches multiple specialized subagents IN PARALLEL to maximize efficiency:
+<critical_requirement>
+**Only ONE file gets written - the final documentation.**
 
-### 1. **Context Analyzer** (Parallel)
+Phase 1 subagents return TEXT DATA to the orchestrator. They must NOT use Write, Edit, or create any files. Only the orchestrator (Phase 2) writes the final documentation file.
+</critical_requirement>
+
+### Phase 1: Parallel Research
+
+<parallel_tasks>
+
+Launch these subagents IN PARALLEL. Each returns text data to the orchestrator.
+
+#### 1. **Context Analyzer**
    - Extracts conversation history
    - Identifies problem type, component, symptoms
-   - Validates against documentation schema
-   - Determines optimal `docs/solutions/` category
-   - Suggests filename based on slug
-   - Returns: YAML frontmatter skeleton + final path
+   - Validates against schema
+   - Returns: YAML frontmatter skeleton
 
-### 2. **Solution Extractor** (Parallel)
+#### 2. **Solution Extractor**
    - Analyzes all investigation steps
    - Identifies root cause
    - Extracts working solution with code examples
    - Returns: Solution content block
 
-### 3. **Documentation Writer** (Parallel)
-   - Assembles complete markdown file
-   - Validates YAML frontmatter
-   - Formats content for readability
+#### 3. **Related Docs Finder**
+   - Searches `docs/solutions/` for related documentation
+   - Identifies cross-references and links
+   - Finds related GitHub issues
+   - Returns: Links and relationships
 
-### 4. **Optional: Specialized Agent Invocation** (Post-Documentation)
-   Based on problem type detected, automatically invoke applicable agents:
-   - **performance_issue** → `performance-oracle`
-   - **security_issue** → `security-sentinel`
-   - **database_issue** → `data-integrity-guardian`
-   - Any code-heavy issue → `code-simplicity-reviewer`
+#### 4. **Prevention Strategist**
+   - Develops prevention strategies
+   - Creates best practices guidance
+   - Generates test cases if applicable
+   - Returns: Prevention/testing content
+
+#### 5. **Category Classifier**
+   - Determines optimal `docs/solutions/` category
+   - Validates category against schema
+   - Suggests filename based on slug
+   - Returns: Final path and filename
+
+</parallel_tasks>
+
+### Phase 2: Assembly & Write
+
+<sequential_tasks>
+
+**WAIT for all Phase 1 subagents to complete before proceeding.**
+
+The orchestrating agent (main conversation) performs these steps:
+
+1. Collect all text results from Phase 1 subagents
+2. Assemble complete markdown file from the collected pieces
+3. Validate YAML frontmatter against schema
+4. Create directory if needed: `mkdir -p docs/solutions/[category]/`
+5. Write the SINGLE final file: `docs/solutions/[category]/[filename].md`
+
+</sequential_tasks>
+
+### Phase 3: Optional Enhancement
+
+**WAIT for Phase 2 to complete before proceeding.**
+
+<parallel_tasks>
+
+Based on problem type, optionally invoke specialized agents to review the documentation:
+
+- **performance_issue** → `performance-oracle`
+- **security_issue** → `security-sentinel`
+- **database_issue** → `data-integrity-guardian`
+- **test_failure** → `cora-test-reviewer`
+- Any code-heavy issue → `kieran-rails-reviewer` + `code-simplicity-reviewer`
+
+</parallel_tasks>
 
 ## What It Captures
 
@@ -92,30 +140,44 @@ This command launches multiple specialized subagents IN PARALLEL to maximize eff
 - integration-issues/
 - logic-errors/
 
+## Common Mistakes to Avoid
+
+| ❌ Wrong | ✅ Correct |
+|----------|-----------|
+| Subagents write files like `context-analysis.md`, `solution-draft.md` | Subagents return text data; orchestrator writes one final file |
+| Research and assembly run in parallel | Research completes → then assembly runs |
+| Multiple files created during workflow | Single file: `docs/solutions/[category]/[filename].md` |
+
 ## Success Output
 
 ```
-✓ Parallel documentation generation complete
+✓ Documentation complete
 
-Primary Subagent Results:
-  ✓ Context Analyzer: Identified performance_issue → docs/solutions/performance-issues/
-  ✓ Solution Extractor: Extracted 3 code fixes
-  ✓ Documentation Writer: Created complete markdown
+Subagent Results:
+  ✓ Context Analyzer: Identified performance_issue in brief_system
+  ✓ Solution Extractor: 3 code fixes
+  ✓ Related Docs Finder: 2 related issues
+  ✓ Prevention Strategist: Prevention strategies, test suggestions
+  ✓ Category Classifier: `performance-issues`
 
 Specialized Agent Reviews (Auto-Triggered):
   ✓ performance-oracle: Validated query optimization approach
+  ✓ kieran-rails-reviewer: Code examples meet Rails standards
   ✓ code-simplicity-reviewer: Solution is appropriately minimal
+  ✓ every-style-editor: Documentation style verified
 
 File created:
 - docs/solutions/performance-issues/n-plus-one-brief-generation.md
 
 This documentation will be searchable for future reference when similar
-issues occur.
+issues occur in the Email Processing or Brief System modules.
 
 What's next?
 1. Continue workflow (recommended)
-2. View documentation
-3. Other
+2. Link related documentation
+3. Update other references
+4. View documentation
+5. Other
 ```
 
 ## The Compounding Philosophy
@@ -152,17 +214,20 @@ Build → Test → Find Issue → Research → Improve → Document → Validate
 Based on problem type, these agents can enhance documentation:
 
 ### Code Quality & Review
+- **kieran-rails-reviewer**: Reviews code examples for Rails best practices
 - **code-simplicity-reviewer**: Ensures solution code is minimal and clear
 - **pattern-recognition-specialist**: Identifies anti-patterns or repeating issues
 
 ### Specific Domain Experts
 - **performance-oracle**: Analyzes performance_issue category solutions
 - **security-sentinel**: Reviews security_issue solutions for vulnerabilities
+- **cora-test-reviewer**: Creates test cases for prevention strategies
 - **data-integrity-guardian**: Reviews database_issue migrations and queries
 
 ### Enhancement & Documentation
 - **best-practices-researcher**: Enriches solution with industry best practices
-- **framework-docs-researcher**: Links to framework documentation references
+- **every-style-editor**: Reviews documentation style and clarity
+- **framework-docs-researcher**: Links to Rails/gem documentation references
 
 ### When to Invoke
 - **Auto-triggered** (optional): Agents can run post-documentation for enhancement
@@ -172,34 +237,3 @@ Based on problem type, these agents can enhance documentation:
 
 - `/research [topic]` - Deep investigation (searches docs/solutions/ for patterns)
 - `/workflows:plan` - Planning workflow (references documented solutions)
-
-## Auto-Spawn: Skill Learning
-
-After documenting the solution, automatically spawn an autoskill subagent **in parallel** to analyze the session for skill update opportunities:
-
-```bash
-Task general-purpose (run_in_background: true): "Use the autoskill skill.
-
-1. Read the skill: cat plugins/compound-engineering/skills/autoskill/SKILL.md
-2. Scan this conversation for skill improvement opportunities:
-   - **Generalizable rules**: User said 'we should always...', 'from now on...', 'respect this pattern'
-   - **Corrections**: User said 'use X instead of Y', 'don't do X'
-   - **Repeated patterns**: Same feedback given multiple times
-3. Apply quality filter: repeated, generalizable, actionable, new
-4. If NO qualified signals → return silently (no output)
-5. If qualified signals found → propose updates with evidence and await approval
-
-Focus on explicit generalizable statements from the user.
-Skip one-off corrections and general best practices."
-```
-
-**When to activate:**
-- User states generalizable rules: "we should always...", "from now on...", "never do X"
-- Repeated corrections across the session
-- Explicit requests to remember a pattern
-
-The autoskill:
-- Runs in parallel with documentation completion
-- Only surfaces if it finds qualified signals
-- Requires explicit approval before editing any files
-

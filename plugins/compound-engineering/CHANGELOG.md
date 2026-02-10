@@ -5,6 +5,32 @@ All notable changes to the compound-engineering plugin will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.31.0] - 2026-02-08
+
+### Added
+
+- **`document-review` skill** — Brainstorm and plan refinement through structured review ([@Trevin Chow](https://github.com/trevin))
+- **`/sync` command** — Sync Claude Code personal config across machines ([@Terry Li](https://github.com/terryli))
+
+### Changed
+
+- **Context token optimization (79% reduction)** — Plugin was consuming 316% of the context description budget, causing Claude Code to silently exclude components. Now at 65% with room to grow:
+  - All 29 agent descriptions trimmed from ~1,400 to ~180 chars avg (examples moved to agent body)
+  - 18 manual commands marked `disable-model-invocation: true` (side-effect commands like `/lfg`, `/deploy-docs`, `/triage`, etc.)
+  - 6 manual skills marked `disable-model-invocation: true` (`orchestrating-swarms`, `git-worktree`, `skill-creator`, `compound-docs`, `file-todos`, `resolve-pr-parallel`)
+- **git-worktree**: Remove confirmation prompt for worktree creation ([@Sam Xie](https://github.com/samxie))
+- **Prevent subagents from writing intermediary files** in compound workflow ([@Trevin Chow](https://github.com/trevin))
+
+### Fixed
+
+- Fix crash when hook entries have no matcher ([@Roberto Mello](https://github.com/robertomello))
+- Fix git-worktree detection where `.git` is a file, not a directory ([@David Alley](https://github.com/davidalley))
+- Backup existing config files before overwriting in sync ([@Zac Williams](https://github.com/zacwilliams))
+- Note new repository URL ([@Aarni Koskela](https://github.com/aarnikoskela))
+- Plugin component counts corrected: 29 agents, 24 commands, 18 skills
+
+---
+
 ## [2.30.0] - 2026-02-05
 
 ### Added

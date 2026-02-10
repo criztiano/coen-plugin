@@ -66,17 +66,22 @@ Refine the idea through collaborative dialogue using the **AskUserQuestion tool*
 
 ## Main Tasks
 
-### 1. Repository Research (Always Runs)
+### 1. Local Research (Always Runs - Parallel)
 
 <thinking>
-First, I need to understand the project's conventions and existing patterns. This is fast and local - it informs whether external research is needed.
+First, I need to understand the project's conventions, existing patterns, and any documented learnings. This is fast and local - it informs whether external research is needed.
 </thinking>
 
-Run repo research to understand the codebase:
+Run these agents **in parallel** to gather local context:
 
 - Task repo-research-analyst(feature_description)
+- Task learnings-researcher(feature_description)
 
-**What to look for:** existing patterns, CLAUDE.md guidance, technology familiarity, pattern consistency. These findings inform the next step.
+**What to look for:**
+- **Repo research:** existing patterns, CLAUDE.md guidance, technology familiarity, pattern consistency
+- **Learnings:** documented solutions in `docs/solutions/` that might apply (gotchas, patterns, lessons learned)
+
+These findings inform the next step.
 
 ### 1.5. Research Decision
 
@@ -108,6 +113,7 @@ Run these agents in parallel:
 After all research steps complete, consolidate findings:
 
 - Document relevant file paths from repo research (e.g., `app/services/example_service.rb:42`)
+- **Include relevant institutional learnings** from `docs/solutions/` (key insights, gotchas to avoid)
 - Note external documentation URLs and best practices (if external research was done)
 - List related issues or PRs discovered
 - Capture CLAUDE.md conventions
@@ -190,16 +196,14 @@ date: YYYY-MM-DD
 
 ## MVP
 
-### example.ts
+### test.rb
 
-```typescript
-class Example {
-  private name: string;
-
-  constructor() {
-    this.name = "example";
-  }
-}
+```ruby
+class Test
+  def initialize
+    @name = "test"
+  end
+end
 ```
 
 ## References
@@ -429,11 +433,13 @@ Apply best practices for clarity and actionability, making the issue easy to sca
 # Good example with syntax highlighting and line references
 
 
-```typescript
-// src/services/userService.ts:42
-function processUser(user: User): void {
-  // Implementation here
-}
+```ruby
+# app/services/user_service.rb:42
+def process_user(user)
+
+# Implementation here
+
+end
 ```
 
 # Collapsible error logs
@@ -492,25 +498,25 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 **Options:**
 1. **Open plan in editor** - Open the plan file for review
 2. **Run `/deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
-3. **Run `/plan_review`** - Get feedback from reviewers (Architecture, Simplicity)
-4. **Start `/workflows:work`** - Begin implementing this plan locally
-5. **Start `/workflows:work` on remote** - Begin implementing in Claude Code on the web (use `&` to run in background)
-6. **Create Issue** - Create issue in project tracker (GitHub/Linear)
-7. **Simplify** - Reduce detail level
+3. **Run `/technical_review`** - Technical feedback from code-focused reviewers (DHH, Kieran, Simplicity)
+4. **Review and refine** - Improve the document through structured self-review
+5. **Start `/workflows:work`** - Begin implementing this plan locally
+6. **Start `/workflows:work` on remote** - Begin implementing in Claude Code on the web (use `&` to run in background)
+7. **Create Issue** - Create issue in project tracker (GitHub/Linear)
 
 Based on selection:
 - **Open plan in editor** → Run `open docs/plans/<plan_filename>.md` to open the file in the user's default editor
 - **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
-- **`/plan_review`** → Call the /plan_review command with the plan file path
+- **`/technical_review`** → Call the /technical_review command with the plan file path
+- **Review and refine** → Load `document-review` skill.
 - **`/workflows:work`** → Call the /workflows:work command with the plan file path
 - **`/workflows:work` on remote** → Run `/workflows:work docs/plans/<plan_filename>.md &` to start work in background for Claude Code web
 - **Create Issue** → See "Issue Creation" section below
-- **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
 
 **Note:** If running `/workflows:plan` with ultrathink enabled, automatically run `/deepen-plan` after plan creation for maximum depth and grounding.
 
-Loop back to options after Simplify or Other changes until user selects `/workflows:work` or `/plan_review`.
+Loop back to options after Simplify or Other changes until user selects `/workflows:work` or `/technical_review`.
 
 ## Issue Creation
 
@@ -540,6 +546,6 @@ When user selects "Create Issue", detect their project tracker from CLAUDE.md:
 
 5. **After creation:**
    - Display the issue URL
-   - Ask if they want to proceed to `/workflows:work` or `/plan_review`
+   - Ask if they want to proceed to `/workflows:work` or `/technical_review`
 
 NEVER CODE! Just research and write the plan.
