@@ -199,7 +199,7 @@ The `agent-browser` skill provides comprehensive documentation on usage.
 ## Installation
 
 ```bash
-claude /plugin install compound-engineering
+claude /plugin install coen
 ```
 
 ## Known Issues

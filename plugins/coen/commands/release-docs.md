@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # Release Documentation Command
 
-You are a documentation generator for the compound-engineering plugin. Your job is to ensure the documentation site at `plugins/compound-engineering/docs/` is always up-to-date with the actual plugin components.
+You are a documentation generator for the coen plugin. Your job is to ensure the documentation site at `plugins/coen/docs/` is always up-to-date with the actual plugin components.
 
 ## Overview
 
@@ -24,38 +24,38 @@ First, count and list all current components:
 
 ```bash
 # Count agents
-ls plugins/compound-engineering/agents/*.md | wc -l
+ls plugins/coen/agents/*.md | wc -l
 
 # Count commands
-ls plugins/compound-engineering/commands/*.md | wc -l
+ls plugins/coen/commands/*.md | wc -l
 
 # Count skills
-ls -d plugins/compound-engineering/skills/*/ 2>/dev/null | wc -l
+ls -d plugins/coen/skills/*/ 2>/dev/null | wc -l
 
 # Count MCP servers
-ls -d plugins/compound-engineering/mcp-servers/*/ 2>/dev/null | wc -l
+ls -d plugins/coen/mcp-servers/*/ 2>/dev/null | wc -l
 ```
 
 Read all component files to get their metadata:
 
 ### Agents
-For each agent file in `plugins/compound-engineering/agents/*.md`:
+For each agent file in `plugins/coen/agents/*.md`:
 - Extract the frontmatter (name, description)
 - Note the category (Review, Research, Workflow, Design, Docs)
 - Get key responsibilities from the content
 
 ### Commands
-For each command file in `plugins/compound-engineering/commands/*.md`:
+For each command file in `plugins/coen/commands/*.md`:
 - Extract the frontmatter (name, description, argument-hint)
 - Categorize as Workflow or Utility command
 
 ### Skills
-For each skill directory in `plugins/compound-engineering/skills/*/`:
+For each skill directory in `plugins/coen/skills/*/`:
 - Read the SKILL.md file for frontmatter (name, description)
 - Note any scripts or supporting files
 
 ### MCP Servers
-For each MCP server in `plugins/compound-engineering/mcp-servers/*/`:
+For each MCP server in `plugins/coen/mcp-servers/*/`:
 - Read the configuration and README
 - List the tools provided
 
@@ -118,7 +118,7 @@ Regenerate the MCP servers reference page:
 
 Ensure counts are consistent across:
 
-1. **`plugins/compound-engineering/.claude-plugin/plugin.json`**
+1. **`plugins/coen/.claude-plugin/plugin.json`**
    - Update `description` with correct counts
    - Update `components` object with counts
    - Update `agents`, `commands` arrays with current items
@@ -126,7 +126,7 @@ Ensure counts are consistent across:
 2. **`.claude-plugin/marketplace.json`**
    - Update plugin `description` with correct counts
 
-3. **`plugins/compound-engineering/README.md`**
+3. **`plugins/coen/README.md`**
    - Update intro paragraph with counts
    - Update component lists
 
@@ -137,14 +137,14 @@ Run validation checks:
 ```bash
 # Validate JSON files
 cat .claude-plugin/marketplace.json | jq .
-cat plugins/compound-engineering/.claude-plugin/plugin.json | jq .
+cat plugins/coen/.claude-plugin/plugin.json | jq .
 
 # Verify counts match
-echo "Agents in files: $(ls plugins/compound-engineering/agents/*.md | wc -l)"
-grep -o "[0-9]* specialized agents" plugins/compound-engineering/docs/index.html
+echo "Agents in files: $(ls plugins/coen/agents/*.md | wc -l)"
+grep -o "[0-9]* specialized agents" plugins/coen/docs/index.html
 
-echo "Commands in files: $(ls plugins/compound-engineering/commands/*.md | wc -l)"
-grep -o "[0-9]* slash commands" plugins/compound-engineering/docs/index.html
+echo "Commands in files: $(ls plugins/coen/commands/*.md | wc -l)"
+grep -o "[0-9]* slash commands" plugins/coen/docs/index.html
 ```
 
 ## Step 5: Report Changes

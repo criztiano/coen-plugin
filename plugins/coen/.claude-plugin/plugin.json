@@ -1,17 +1,17 @@
 {
-  "name": "compound-engineering",
+  "name": "coen",
   "version": "2.31.0",
   "description": "AI-powered development tools. 29 agents, 24 commands, 18 skills, 1 MCP server for code review, research, design, and workflow automation.",
   "author": {
     "name": "Cristiano",
     "url": "https://github.com/criztiano"
   },
-  "homepage": "https://github.com/criztiano/coen-plugin",
-  "repository": "https://github.com/criztiano/coen-plugin",
+  "homepage": "https://github.com/criztiano/coen",
+  "repository": "https://github.com/criztiano/coen",
   "license": "MIT",
   "keywords": [
     "ai-powered",
-    "compound-engineering",
+    "coen",
     "workflow-automation",
     "code-review",
     "react",

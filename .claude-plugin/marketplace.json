@@ -10,24 +10,24 @@
   },
   "plugins": [
     {
-      "name": "compound-engineering",
+      "name": "coen",
       "description": "AI-powered development tools that get smarter with every use. Make each unit of engineering work easier than the last. Includes 29 specialized agents, 24 commands, and 18 skills.",
       "version": "2.31.0",
       "author": {
         "name": "Cristiano",
         "url": "https://github.com/criztiano"
       },
-      "homepage": "https://github.com/criztiano/coen-plugin",
+      "homepage": "https://github.com/criztiano/coen",
       "tags": [
         "ai-powered",
-        "compound-engineering",
+        "coen",
         "workflow-automation",
         "code-review",
         "quality",
         "knowledge-management",
         "image-generation"
       ],
-      "source": "./plugins/compound-engineering"
+      "source": "./plugins/coen"
     },
     {
       "name": "coding-tutor",
@@ -36,7 +36,7 @@
       "author": {
         "name": "Nityesh Agarwal"
       },
-      "homepage": "https://github.com/criztiano/coen-plugin",
+      "homepage": "https://github.com/criztiano/coen",
       "tags": [
         "coding",
         "programming",
