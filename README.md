@@ -1,15 +1,15 @@
-# Compound Marketplace
+# Coen Marketplace
 
-[![Build Status](https://github.com/EveryInc/compound-engineering-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/EveryInc/compound-engineering-plugin/actions/workflows/ci.yml)
+[![Build Status](https://github.com/criztiano/coen/actions/workflows/ci.yml/badge.svg)](https://github.com/criztiano/coen/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/@every-env/compound-plugin)](https://www.npmjs.com/package/@every-env/compound-plugin)
 
-A Claude Code plugin marketplace featuring the **Compound Engineering Plugin** — tools that make each unit of engineering work easier than the last.
+A Claude Code plugin marketplace featuring the **Coen Plugin** — tools that make each unit of engineering work easier than the last.
 
 ## Claude Code Install
 
 ```bash
-/plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
-/plugin install compound-engineering
+/plugin marketplace add https://github.com/criztiano/coen
+/plugin install coen
 ```
 
 ## OpenCode + Codex (experimental) Install
@@ -17,17 +17,17 @@ A Claude Code plugin marketplace featuring the **Compound Engineering Plugin** �
 This repo includes a Bun/TypeScript CLI that converts Claude Code plugins to OpenCode and Codex.
 
 ```bash
-# convert the compound-engineering plugin into OpenCode format
-bunx @every-env/compound-plugin install compound-engineering --to opencode
+# convert the coen plugin into OpenCode format
+bunx @every-env/compound-plugin install coen --to opencode
 
 # convert to Codex format
-bunx @every-env/compound-plugin install compound-engineering --to codex
+bunx @every-env/compound-plugin install coen --to codex
 ```
 
 Local dev:
 
 ```bash
-bun run src/index.ts install ./plugins/compound-engineering --to opencode
+bun run src/index.ts install ./plugins/coen --to opencode
 ```
 
 OpenCode output is written to `~/.config/opencode` by default, with `opencode.json` at the root and `agents/`, `skills/`, and `plugins/` alongside it.
@@ -81,6 +81,6 @@ Compound engineering inverts this. 80% is in planning and review, 20% is in exec
 
 ## Learn More
 
-- [Full component reference](plugins/compound-engineering/README.md) - all agents, commands, skills
+- [Full component reference](plugins/coen/README.md) - all agents, commands, skills
 - [Compound engineering: how Every codes with agents](https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents)
 - [The story behind compounding engineering](https://every.to/source-code/my-ai-had-already-fixed-the-code-before-i-saw-it)

@@ -51,7 +51,7 @@ Ensure that the code is ready for analysis (either in worktree or on current bra
 #### Protected Artifacts
 
 <protected_artifacts>
-The following paths are compound-engineering pipeline artifacts and must never be flagged for deletion, removal, or gitignore by any review agent:
+The following paths are coen pipeline artifacts and must never be flagged for deletion, removal, or gitignore by any review agent:
 
 - `docs/plans/*.md` — Plan files created by `/workflows:plan`. These are living documents that track implementation progress (checkboxes are checked off by `/workflows:work`).
 - `docs/solutions/*.md` — Solution documents created during the pipeline.

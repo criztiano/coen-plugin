@@ -13,7 +13,7 @@ describe("loadClaudePlugin", () => {
   test("loads manifest, agents, commands, skills, hooks", async () => {
     const plugin = await loadClaudePlugin(fixtureRoot)
 
-    expect(plugin.manifest.name).toBe("compound-engineering")
+    expect(plugin.manifest.name).toBe("coen")
     expect(plugin.agents.length).toBe(2)
     expect(plugin.commands.length).toBe(7)
     expect(plugin.skills.length).toBe(2)

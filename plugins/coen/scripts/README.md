@@ -67,9 +67,9 @@ hooks:
     - matcher: "Edit|Write"
       hooks:
         - type: command
-          command: "./plugins/compound-engineering/scripts/lint-on-edit.sh"
+          command: "./plugins/coen/scripts/lint-on-edit.sh"
         - type: command
-          command: "./plugins/compound-engineering/scripts/check-ui-file.sh"
+          command: "./plugins/coen/scripts/check-ui-file.sh"
 ```
 
 ### Project-level SubagentStop hook
@@ -85,7 +85,7 @@ Add this to your project's `.claude/settings.json`:
         "hooks": [
           {
             "type": "command",
-            "command": "./plugins/compound-engineering/scripts/run-tests-after-review.sh"
+            "command": "./plugins/coen/scripts/run-tests-after-review.sh"
           }
         ]
       }

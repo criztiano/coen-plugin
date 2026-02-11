@@ -7,9 +7,9 @@ hooks:
     - matcher: "Edit|Write"
       hooks:
         - type: command
-          command: "./plugins/compound-engineering/scripts/lint-on-edit.sh"
+          command: "./plugins/coen/scripts/lint-on-edit.sh"
         - type: command
-          command: "./plugins/compound-engineering/scripts/check-ui-file.sh"
+          command: "./plugins/coen/scripts/check-ui-file.sh"
 ---
 
 <examples>
@@ -56,7 +56,7 @@ When reviewing code, you will:
    - Eliminate extensibility points without clear use cases
    - Question generic solutions for specific problems
    - Remove "just in case" code
-   - Never flag `docs/plans/*.md` or `docs/solutions/*.md` for removal — these are compound-engineering pipeline artifacts created by `/workflows:plan` and used as living documents by `/workflows:work`
+   - Never flag `docs/plans/*.md` or `docs/solutions/*.md` for removal — these are coen pipeline artifacts created by `/workflows:plan` and used as living documents by `/workflows:work`
 
 6. **Optimize for Readability**:
    - Prefer self-documenting code over comments

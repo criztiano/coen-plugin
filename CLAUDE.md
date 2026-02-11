@@ -1,11 +1,11 @@
-# Every Marketplace - Claude Code Plugin Marketplace
+# Coen - Claude Code Plugin Marketplace
 
-This repository is a Claude Code plugin marketplace that distributes the `compound-engineering` plugin to developers building with AI-powered tools.
+This repository is a Claude Code plugin marketplace that distributes the `coen` plugin to developers building with AI-powered tools.
 
 ## Repository Structure
 
 ```
-every-marketplace/
+coen/
 ├── .claude-plugin/
 │   └── marketplace.json          # Marketplace catalog (lists available plugins)
 ├── docs/                         # Documentation site (GitHub Pages)
@@ -14,7 +14,7 @@ every-marketplace/
 │   ├── js/                       # JavaScript
 │   └── pages/                    # Reference pages
 └── plugins/
-    └── compound-engineering/   # The actual plugin
+    └── coen/                   # The actual plugin
         ├── .claude-plugin/
         │   └── plugin.json        # Plugin metadata
         ├── agents/                # 24 specialized AI agents
@@ -43,7 +43,7 @@ When working on this repository, follow the compounding engineering process:
 ### Rules for Working with Upstream
 
 1. **NEVER push to upstream** - Do not create PRs against `EveryInc/compound-engineering-plugin`
-2. **NEVER use `gh pr create` without `--repo criztiano/coen-plugin`** - GitHub defaults to upstream
+2. **NEVER use `gh pr create` without `--repo criztiano/coen`** - GitHub defaults to upstream
 3. **Pull FROM upstream only** - We cherry-pick useful commits from upstream to our fork
 
 ### Cherry-Picking from Upstream
@@ -64,7 +64,7 @@ git log upstream/main --oneline
 git cherry-pick <commit-sha>
 
 # Create PR against OUR fork (not upstream!)
-gh pr create --repo criztiano/coen-plugin --base main
+gh pr create --repo criztiano/coen --base main
 ```
 
 ### Creating PRs (Important!)
@@ -73,7 +73,7 @@ Always explicitly specify our fork when creating PRs:
 
 ```bash
 # CORRECT - targets our fork
-gh pr create --repo criztiano/coen-plugin --base main
+gh pr create --repo criztiano/coen --base main
 
 # WRONG - will target upstream EveryInc repo
 gh pr create --base main
@@ -103,22 +103,22 @@ When agents, commands, or skills are added/removed, follow this checklist:
 
 ```bash
 # Count agents
-ls plugins/compound-engineering/agents/*.md | wc -l
+ls plugins/coen/agents/*.md | wc -l
 
 # Count commands
-ls plugins/compound-engineering/commands/*.md | wc -l
+ls plugins/coen/commands/*.md | wc -l
 
 # Count skills
-ls -d plugins/compound-engineering/skills/*/ 2>/dev/null | wc -l
+ls -d plugins/coen/skills/*/ 2>/dev/null | wc -l
 ```
 
 #### 2. Update ALL description strings with correct counts
 
 The description appears in multiple places and must match everywhere:
 
-- [ ] `plugins/compound-engineering/.claude-plugin/plugin.json` → `description` field
+- [ ] `plugins/coen/.claude-plugin/plugin.json` → `description` field
 - [ ] `.claude-plugin/marketplace.json` → plugin `description` field
-- [ ] `plugins/compound-engineering/README.md` → intro paragraph
+- [ ] `plugins/coen/README.md` → intro paragraph
 
 Format: `"Includes X specialized agents, Y commands, and Z skill(s)."`
 
@@ -126,13 +126,13 @@ Format: `"Includes X specialized agents, Y commands, and Z skill(s)."`
 
 When adding new functionality, bump the version in:
 
-- [ ] `plugins/compound-engineering/.claude-plugin/plugin.json` → `version`
+- [ ] `plugins/coen/.claude-plugin/plugin.json` → `version`
 - [ ] `.claude-plugin/marketplace.json` → plugin `version`
 
 #### 4. Update documentation
 
-- [ ] `plugins/compound-engineering/README.md` → list all components
-- [ ] `plugins/compound-engineering/CHANGELOG.md` → document changes
+- [ ] `plugins/coen/README.md` → list all components
+- [ ] `plugins/coen/CHANGELOG.md` → document changes
 - [ ] `CLAUDE.md` → update structure diagram if needed
 
 #### 5. Rebuild documentation site
@@ -153,15 +153,15 @@ This will:
 
 ```bash
 cat .claude-plugin/marketplace.json | jq .
-cat plugins/compound-engineering/.claude-plugin/plugin.json | jq .
+cat plugins/coen/.claude-plugin/plugin.json | jq .
 ```
 
 #### 6. Verify before committing
 
 ```bash
 # Ensure counts in descriptions match actual files
-grep -o "Includes [0-9]* specialized agents" plugins/compound-engineering/.claude-plugin/plugin.json
-ls plugins/compound-engineering/agents/*.md | wc -l
+grep -o "Includes [0-9]* specialized agents" plugins/coen/.claude-plugin/plugin.json
+ls plugins/coen/agents/*.md | wc -l
 ```
 
 ### Marketplace.json Structure
@@ -310,7 +310,7 @@ python -m http.server 8000
 2. Install the plugin:
 
    ```bash
-   claude /plugin install compound-engineering
+   claude /plugin install coen
    ```
 
 3. Test agents and commands:
@@ -325,28 +325,28 @@ Before committing, ensure JSON files are valid:
 
 ```bash
 cat .claude-plugin/marketplace.json | jq .
-cat plugins/compound-engineering/.claude-plugin/plugin.json | jq .
+cat plugins/coen/.claude-plugin/plugin.json | jq .
 ```
 
 ## Common Tasks
 
 ### Adding a New Agent
 
-1. Create `plugins/compound-engineering/agents/new-agent.md`
+1. Create `plugins/coen/agents/new-agent.md`
 2. Update plugin.json agent count and agent list
 3. Update README.md agent list
 4. Test with `claude agent new-agent "test"`
 
 ### Adding a New Command
 
-1. Create `plugins/compound-engineering/commands/new-command.md`
+1. Create `plugins/coen/commands/new-command.md`
 2. Update plugin.json command count and command list
 3. Update README.md command list
 4. Test with `claude /new-command`
 
 ### Adding a New Skill
 
-1. Create skill directory: `plugins/compound-engineering/skills/skill-name/`
+1. Create skill directory: `plugins/coen/skills/skill-name/`
 2. Add skill structure:
    ```
    skills/skill-name/
@@ -375,7 +375,7 @@ Detailed documentation...
 
 Tags should reflect the compounding engineering philosophy:
 
-- Use: `ai-powered`, `compound-engineering`, `workflow-automation`, `knowledge-management`
+- Use: `ai-powered`, `coen`, `workflow-automation`, `knowledge-management`
 - Avoid: Framework-specific tags unless the plugin is framework-specific
 
 ## Commit Conventions
